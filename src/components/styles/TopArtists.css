@@ -1,0 +1,18 @@
+.top-artists-column {
+    padding: 10px 32px;
+}
+
+.top-artist-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-artist-title h2 {
+    font-size: 18px;
+    color: #24242E;
+}
+
+.actual-top-artists-list {
+    display: flex;
+}

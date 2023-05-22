@@ -1,0 +1,25 @@
+.our-features-main-container {
+    padding: 10px 32px;
+    padding-bottom: 30px;
+}
+
+.inner-our-features {
+    width: 70%;
+}
+
+.inner-our-features h1 {
+    font-size: 29px;
+    color: #24242E;
+}
+
+.inner-our-features h3 {
+    font-size: 19px;
+    color: #4343ef;
+}
+
+.get-trial-call-to-action {
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: space-between;
+}

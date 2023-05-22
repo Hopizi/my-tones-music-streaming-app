@@ -1,0 +1,30 @@
+.top-artists-card-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 8px 0 1px;
+}
+
+.top-artist-image-card {
+    width: 90px;
+    height: 90px;
+    background-color: #d6d6d6;
+    border-radius: 20px;
+}
+
+.top-artist-name-plays {
+    text-align: center;
+}
+
+.top-artist-name-plays p:first-child {
+    font-weight: bold;
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+.top-artist-name-plays p:nth-child(2) {
+    margin: 0;
+    font-size: 13px;
+}

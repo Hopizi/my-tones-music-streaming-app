@@ -1,0 +1,15 @@
+.btn-main-container {
+    width: fit-content;
+    padding: 0 16px;
+    background-color: #4343ef;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.our-features {
+    height: 38px;
+}

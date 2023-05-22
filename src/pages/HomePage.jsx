@@ -1,6 +1,6 @@
 import React from 'react'
 import "./styles/HomePage.css"
-import { Sidebar, Navbar, Top100Weekly, NowPlaying } from '../components' 
+import { Sidebar, Navbar, Top100Weekly, NowPlaying, OurFeatures, TopArtists } from '../components' 
 
 function HomePage() {
   return (
@@ -14,7 +14,13 @@ function HomePage() {
             </div>
             <div className="music-space-main">
                 <div className='main-page-display'>
-
+                    <div className='main-page-row-1'>
+                        <OurFeatures />
+                    </div>
+                    <div className='main-page-row-2'>
+                        <TopArtists />
+                    </div>
+                    <div></div>
                 </div>
                 <div className='main-page-col-2'>
                     <div className="top-100-main">

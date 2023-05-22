@@ -4,6 +4,9 @@ import SongCard from "./SongCard";
 import Top100Weekly from "./Top100Weekly";
 import NowPlaying from "./NowPlaying";
 import CurrentSong from "./CurrentSong";
+import OurFeatures  from "./OurFeatures";
+import Button from "./Button";
+import TopArtists from "./TopArtists";
 
 export {
     Sidebar,
@@ -11,5 +14,8 @@ export {
     Top100Weekly,
     SongCard,
     NowPlaying,
-    CurrentSong
+    CurrentSong,
+    OurFeatures,
+    Button,
+    TopArtists
 }

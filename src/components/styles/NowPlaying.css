@@ -1,8 +1,53 @@
 .now-playing-main {
-    border: 1px solid;
+    border-top: 1px solid #d6d6d6;
     height: 100%;
 }
 
 .now-playing-main p {
     text-align: center;
+}
+
+.song-progress {
+    padding: 0 10px;
+}
+
+.song-slider {
+    height: 3px;
+    background-color: #d6d6d6;
+    border-radius: 3px;
+}
+
+.inner-song-slider {
+    height: 4px;
+    background-color:  #4343ef;
+    border-radius: 3px;
+}
+
+.time-remaining {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.song-control-feature {
+    display: flex;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pause-play-container {
+    width: 42px;
+    height: 42px;
+    background-color: #4343ef;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pause-play {
+    width: 60%;
+    height: 60%;
+    fill: #fff;
 }

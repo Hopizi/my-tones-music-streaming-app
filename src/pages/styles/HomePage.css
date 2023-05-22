@@ -1,5 +1,4 @@
 .home-page-main-container {
-    border: 1px solid red;
     height: 100vh;
     display: flex;
 }
@@ -7,11 +6,9 @@
 .sidebar-container {
     width: 15%;
     height: 100%;
-    border: 1px solid blue;
 }
 
 .col-2-main {
-    border: 1px solid green;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -24,19 +21,17 @@
 }
 
 .music-space-main {
-    border: 1px solid;
     flex-grow: 1;
     display: flex;
 }
 
 .main-page-display {
-    border: 1px solid red;
     width: 65%;
     height: 100%;
 }
 
 .main-page-col-2 {
-    flex: 1;
+    width: 35%;
     background-color: #fff;
     border-radius: 24px 0px 0px 0px;
     display: flex;
@@ -44,7 +39,15 @@
 }
 
 .now-playing-main-container {
-    border: 1px solid;
     flex-grow: 1;
-    padding: 5px 10px;
+    padding: 5px 50px;
+}
+
+.main-page-display {
+    padding: 0 32px;
+}
+
+.main-page-row-2 {
+    background-color: #fff;
+    border-radius: 24px;
 }
