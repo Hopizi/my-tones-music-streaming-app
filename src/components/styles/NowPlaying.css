@@ -1,0 +1,8 @@
+.now-playing-main {
+    border: 1px solid;
+    height: 100%;
+}
+
+.now-playing-main p {
+    text-align: center;
+}

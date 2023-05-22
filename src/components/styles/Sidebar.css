@@ -1,0 +1,36 @@
+.side-bar-main-container {
+    border: 1px solid red;
+    height: 100%;
+}
+
+.side-bar-main-container ul li {
+    list-style: none;
+    padding: 6px 0;
+    font-size: 15px;
+}
+
+.inner-logo-text-contianer h1 {
+    font-size: 22px;
+    color: #4343EF;
+}
+
+.main-logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.inner-logo-text-contianer {
+    display: flex;
+    align-items: center;
+} 
+
+.logo-contianer {
+    width: 24px;
+    height: 24px;
+    background-color: #4343EF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
