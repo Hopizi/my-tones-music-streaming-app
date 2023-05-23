@@ -9,13 +9,15 @@ function TopArtists() {
             <h2>TOP ARTISTS</h2>
             <p>More List</p>
         </div>
-        <div className='actual-top-artists-list'>
-            <TopArtistsCard />
-            <TopArtistsCard />
-            <TopArtistsCard />
-            <TopArtistsCard />
-            <TopArtistsCard />
-            <TopArtistsCard />
+        <div className='top-artist-list-main'>
+            <div className='actual-top-artists-list'>
+              <TopArtistsCard />
+              <TopArtistsCard />
+              <TopArtistsCard />
+              <TopArtistsCard />
+              <TopArtistsCard />
+              <TopArtistsCard />
+            </div>
         </div>
     </div>
   )

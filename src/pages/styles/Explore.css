@@ -1,0 +1,20 @@
+.explore-main h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #4343ef;
+}
+
+.new-music-row-2 {
+    margin-top: 23px;
+    padding: 5px 20px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.playlists-you-need-row-3 {
+    margin-top: 23px;
+    margin-bottom: 23px;
+    padding: 5px 20px;
+    background-color: #fff;
+    border-radius: 20px;
+}

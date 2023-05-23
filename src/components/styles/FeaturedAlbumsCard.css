@@ -1,0 +1,27 @@
+.featured-album-card-main {
+    width: 335px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: grey;
+    position: relative;
+    margin-right: 13px;
+}
+
+.featured-album-card-info {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+}
+
+.featured-album-card-info p:first-child {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.featured-album-card-info p:nth-child(2) {
+    font-size: 14px;
+    margin: 0;
+}

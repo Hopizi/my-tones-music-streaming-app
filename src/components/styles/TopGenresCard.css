@@ -1,0 +1,12 @@
+.top-genres-card-main {
+    width: fit-content;
+    padding: 12px;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.top-genres-card-main p{
+    color: #fff;
+    margin: 0;
+}

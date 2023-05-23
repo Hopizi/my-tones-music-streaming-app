@@ -1,0 +1,29 @@
+.top-collections-header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-collections-header-section h2{
+    font-size: 18px;
+    color: #24242e;
+}
+
+.top-collections-header-section p {
+    font-size: 14px;
+    color: #787887;
+}
+
+.top-collections-main {
+    padding: 5px 15px;
+}
+
+.top-collections {
+    display: flex;
+    justify-content: center;
+}
+
+.top-collection-actual-section {
+    display: flex;
+    flex-wrap: wrap;
+}

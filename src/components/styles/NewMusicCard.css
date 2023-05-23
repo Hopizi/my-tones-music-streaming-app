@@ -1,0 +1,23 @@
+.new-music-card-main-cover-img {
+    width: 145px;
+    height: 145px;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+.new-music-card-info p:first-child {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4d4d56;
+    margin: 3px;
+}
+
+.new-music-card-info p:nth-child(2) {
+    font-size: 14px;
+    color: #4d4d56;
+    margin: 0;
+}
+
+.new-music-card-main {
+    margin-right: 24px;
+}

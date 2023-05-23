@@ -1,0 +1,9 @@
+.new-music-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-musics-container {
+    display: flex;
+}

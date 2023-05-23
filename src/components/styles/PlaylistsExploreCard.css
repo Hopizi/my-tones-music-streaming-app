@@ -1,0 +1,19 @@
+.playlists-card-explore {
+    margin-right: 24px;
+}
+
+.playlists-explore-card-cover {
+    width: 145px;
+    height: 145px;
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.playlists-card-explore {
+    width: 145px;
+}
+
+.playlists-explore-card-info p {
+    font-size: 12px;
+    margin: 3px;
+}

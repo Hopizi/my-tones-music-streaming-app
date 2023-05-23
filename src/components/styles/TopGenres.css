@@ -1,0 +1,29 @@
+.top-genres-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.top-genres-btn-inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top-genres {
+    padding: 5px 15px;
+}
+
+.top-genres-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-genres-header h2 {
+    font-size: 18px;
+    color: #24242E;
+}
+
+.top-genres-header p {
+    font-size: 14px;
+    color: #787887;
+}
