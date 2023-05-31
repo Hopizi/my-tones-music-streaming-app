@@ -3,9 +3,9 @@ import {Discover,Explorer,Search,Music,Albums,Artists,Cover,Favourites,Shared,Do
 
 
 const menuLinks = [
-        {title: "Discover", icon: Discover},
-        {title: "Explorer", icon: Explorer},
-        {title: "Search", icon: Search},
+        {title: "Discover", icon: Discover, path: '/'},
+        {title: "Explorer", icon: Explorer, path: '/explore'},
+        {title: "Search", icon: Search, path: '/search'},
 ]
 
 const libraryLinks = [
@@ -15,14 +15,13 @@ const libraryLinks = [
 ]
 
 const playlistsLinks = [
-        {title: "Cover", icon: Download},
         {title: "Favourites", icon: Shared},
         {title: "Shared", icon: Favourites},
         {title: "Downloads", icon: Cover}
 ]
 
 const othersLink = [
-        {title: "Settings", icon: Logout},
+        {title: "Settings", icon: Logout, path: '/settings'},
         {title: "Logout", icon: Settings}
 ]
 

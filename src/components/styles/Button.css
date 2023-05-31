@@ -1,15 +1,36 @@
 .btn-main-container {
     width: fit-content;
-    padding: 0 16px;
+    padding: 10px 16px;
     background-color: #4343ef;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 14px;
     color: #fff;
     cursor: pointer;
     border: none;
     transition: opacity 0.2s ease-in-out;
+    font-family: inherit
+}
+
+.btn-main-container:disabled {
+    background-color: #6262e9;
+    cursor: not-allowed;
 }
 
 .our-features {
     height: 38px;
+}
+
+.margin-left {
+    display: flex;
+    margin-left: auto
+}
+
+.width-100 {
+    width: 100%;
+    font-size: 15px;
+}
+
+.sign-up-btn {
+    padding: 10px 20px;
+    font-size: 19px;
 }

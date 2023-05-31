@@ -17,6 +17,13 @@ import NewMusic from "./NewMusic";
 import NewMusicCard from "./NewMusicCard";
 import PlaylistsExplore from "./PlaylistsExplore";
 import PlaylistsExploreCard from "./PlaylistsExploreCard";
+import MyMusicCard from "./MyMusicCard";
+import AlbumsCard from "./AlbumsCard";
+import ArtistsCard from "./ArtistsCard";
+import ArtistsAlbumCard from "./ArtistsAlbumCard";
+import PlaylistsMusicCard from "./PlaylistsMusicCard";
+import ContinueWith from "./ContinueWith";
+
 
 export {
     Sidebar,
@@ -37,5 +44,11 @@ export {
     NewMusic,
     NewMusicCard,
     PlaylistsExplore,
-    PlaylistsExploreCard
+    PlaylistsExploreCard,
+    MyMusicCard,
+    AlbumsCard,
+    ArtistsCard,
+    ArtistsAlbumCard,
+    PlaylistsMusicCard,
+    ContinueWith
 }

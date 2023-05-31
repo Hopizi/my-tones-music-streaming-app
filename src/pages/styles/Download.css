@@ -1,0 +1,45 @@
+.downloads-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.downloads-header-section h1 {
+    font-size: 24px;
+    color: #4343ef;
+    font-weight: 600;
+}
+
+.play-downloads {
+    width: 14px;
+    height: 14px;
+    fill: #4343ef;
+    margin-right: 5px;
+}
+
+.shuffle-downloads {
+    width: 14px;
+    height: 14px;
+    fill: #4343ef;
+    margin-right: 5px;
+}
+
+.downloads-header-section-col-2 {
+    display: flex;
+    align-items: center;
+}
+
+.downloads-header-section-col-2 span {
+    font-size: 14px;
+    color: #4343ef;
+}
+
+.downloads-header-section-col-2 span:first-child {
+    margin-right: 36px;
+}
+
+.downloads-cards-container {
+    display: flex;
+    flex-direction: column;
+}

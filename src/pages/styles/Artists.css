@@ -1,0 +1,84 @@
+.artists-main-header-section {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4343ef;
+}
+
+.artists-display-container {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.main-artists-display-contianer {
+    width: 50%;
+}
+
+.main-artists-info-display {
+    width: 50%;
+    padding: 20px 20px;
+    border-left: 2px solid #f0f0f5;
+}
+
+.main-artists-info-header {
+    border-bottom: 2px solid #f0f0f5;
+    margin-bottom: 16px;
+}
+
+.play-main-artists {
+    width: 14px;
+    height: 14px;
+    fill: #4343ef;
+    margin-right: 5px;
+}
+
+.shuffle-main-artists {
+    width: 14px;
+    height: 14px;
+    fill: #4343ef;
+    margin-right: 5px;
+}
+
+.main-artists-info-header-text p {
+    margin: 7px 0;
+}
+
+.main-artists-info-header-text p:first-child {
+    font-size: 24px;
+    font-weight: 600;
+    color: #4d4d56;
+}
+
+.main-artists-info-header-text p:nth-child(2) {
+    font-size: 14px;
+    color: #787887;
+}
+
+.main-artists-info-play-shuffle {
+    margin-top: 23px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.main-artists-info-play-shuffle span {
+    color: #4343ef;
+}
+
+.main-artists-info-play-shuffle span:first-child {
+    margin-right: 36px;
+}
+
+.artists-album-card-main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.see-more-artist-info p {
+    font-size: 14px;
+    color: #4343ef;
+    cursor: pointer;
+}

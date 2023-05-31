@@ -1,0 +1,25 @@
+.albums-card-main-cover {
+    width: 153px;
+    height: 153px;
+    border-radius: 10px;
+    background-color: gray;
+}
+
+.albums-card-main-info p {
+    margin: 3px;
+    color:#24242F;
+}
+
+.albums-card-main-info p:first-child {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.albums-card-main-info p:nth-child(2) {
+    font-size: 13px;
+}
+
+.albums-card-main {
+    margin-right: 10px;
+    margin-bottom: 20px;
+}

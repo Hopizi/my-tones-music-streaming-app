@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./styles/Sidebar.css"
 import { menuLinks,libraryLinks, playlistsLinks, othersLink } from '../helpers/SidebarLinks'
 import { Logo } from '../assets/sidebar-icons'
+import { AuthContext } from '../context/AuthenticationContext'
+import { Link } from 'react-router-dom'
 
-function Sidebar() {
+function Sidebar({setSelectedLink}) {
+
+    const {logOut} = useContext(AuthContext)
 
 
     const iconsStyle = {
@@ -25,7 +29,7 @@ function Sidebar() {
                 <p>MENU</p>
                 {
                     menuLinks.map((menuLink, index) => {
-                        return <li key={index}>{<menuLink.icon style={iconsStyle}/>}{menuLink.title}</li>
+                        return <Link to={menuLink.path}><li key={index} onClick={() => setSelectedLink(menuLink.title)}>{<menuLink.icon style={iconsStyle}/>}{menuLink.title}</li></Link>
                     })
                 }
             </ul>
@@ -33,7 +37,7 @@ function Sidebar() {
                 <p>LIBRARY</p>
                 {
                     libraryLinks.map((libraryLink, index) => {
-                        return <li key={index}>{<libraryLink.icon style={iconsStyle}/>}{libraryLink.title}</li>
+                        return <li key={index} onClick={() => setSelectedLink(libraryLink.title)}>{<libraryLink.icon style={iconsStyle}/>}{libraryLink.title}</li>
                     })
                 }
             </ul>
@@ -41,7 +45,7 @@ function Sidebar() {
                 <p>PLAYLIST</p>
                 {
                     playlistsLinks.map((playlistLink, index) => {
-                        return <li key={index}>{<playlistLink.icon style={iconsStyle}/>}{playlistLink.title}</li>
+                        return <li key={index} onClick={() => setSelectedLink(playlistLink.title)}>{<playlistLink.icon style={iconsStyle}/>}{playlistLink.title}</li>
                     })
                 }
             </ul>
@@ -49,7 +53,7 @@ function Sidebar() {
                 <p>OTHERS</p>
                 {
                     othersLink.map((othersLink, index) => {
-                        return <li key={index}>{<othersLink.icon style={iconsStyle}/>}{othersLink.title}</li>
+                        return <Link to={othersLink.title === 'Settings' ? othersLink.path : ''}><li key={index} onClick={ othersLink.title === "Logout" ? logOut : () => setSelectedLink(othersLink.title)}>{<othersLink.icon style={iconsStyle}/>}{othersLink.title}</li></Link>
                     })
                 }
             </ul>

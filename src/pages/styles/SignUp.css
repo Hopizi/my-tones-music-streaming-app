@@ -1,0 +1,180 @@
+.sign-up-main-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sign-up-card-main {
+    width: 40%;
+    margin: 40px 0;
+}
+
+.sign-up-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.sign-up-with-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sign-up-with-container h1{
+    text-align: center;
+    font-size: 25px;
+}
+
+.sign-up-form {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+
+.inputs-for-sign-up {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.inputs-for-sign-up label {
+    font-size: 14px;
+    font-weight: 520;
+    margin-bottom: 5px;
+}
+
+.inputs-for-sign-up input {
+    width: 95%;
+    height: 35px;
+    border: 1px solid grey;
+    font-size: 17px;
+    font-family: inherit;
+    padding: 5px 10px;
+}
+
+.inputs-for-sign-up input:focus {
+    outline: none;
+}
+
+.date-of-birth {
+    display: flex;
+    margin-top: 20px;
+}
+
+.date-of-birth div {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-of-birth div label {
+    margin-bottom: 5px;
+}
+
+.date-of-birth div:first-child {
+    width: 30%;
+}
+
+.date-of-birth div:first-child input {
+    width: 50%; 
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid grey;
+    font-family: inherit;
+    font-size: 19px;
+}
+
+.date-of-birth div:nth-child(2) {
+    width: 35%;
+}
+
+.date-of-birth div:nth-child(2) select {
+    width: 100%;
+    height: 40px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.date-of-birth div:nth-child(2) select:focus {
+    outline: none;
+}
+
+.date-of-birth div:nth-child(3) {
+    margin-left: auto;
+    width: 20%;
+}
+
+.date-of-birth div:nth-child(3) input {
+    width: 80%; 
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid grey;
+    font-family: inherit;
+    font-size: 19px;
+}
+
+.gender-section {
+    margin-top: 30px;
+}
+
+.gender-section p {
+    font-size: 14px;
+    font-weight: 520;
+}
+
+.gender-section input {
+    margin: 0  10px;
+}
+
+.gender-section label {
+    margin-right: 20px;
+}
+
+.agree-to-terms-and-conditions {
+    margin-top: 30px;
+}
+
+.agree-to-terms-and-conditions div label {
+    font-size: 11px;
+}
+
+.agree-to-terms-and-conditions p {
+    font-size: 11px;
+    margin-top: 30px;
+}
+
+.btn-container-sign-up {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-redirect {
+    margin-top: 50px;
+}
+
+.login-redirect {
+    text-align: center;
+    font-size: 15px;
+}
+
+.sign-up-links {
+    cursor: pointer;
+    color: #4343ef;
+}
+
+.login-inner-logo-text-contianer {
+    cursor: pointer;
+}
+
+.continue-with-login-method {
+    cursor: pointer;
+}
+
+.show-hide-sign-up {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    bottom: 13px;
+}

@@ -1,0 +1,57 @@
+.albums-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.albums-header-container h1 {
+    font-size: 24px;
+    color: #4343ef;
+    font-weight: 600;
+}
+
+.play-albums {
+    width: 14px;
+    height: 14px;
+    fill: #4343ef;
+    margin-right: 5px;
+}
+
+.shuffle-albums {
+    width: 14px;
+    height: 14px;
+    fill: #4343ef;
+    margin-right: 5px;
+}
+
+.albums-header-col-2 {
+    display: flex;
+    align-items: center;
+}
+
+.albums-header-col-2 span {
+    font-size: 14px;
+    color: #4343ef;
+}
+
+.albums-header-col-2 span:first-child {
+    margin-right: 36px;
+}
+
+.albums-main-container-cards {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.albums-main-container-cards h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4D4D56;
+}
+
+.all-albums-main-container {
+    display: flex;
+    flex-wrap: wrap;
+}

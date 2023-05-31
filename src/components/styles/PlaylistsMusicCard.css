@@ -1,0 +1,45 @@
+.playlists-music-card {
+    padding: 17px 18px;
+    background-color: #fff;
+    border-radius: 16px;
+    margin-bottom: 10px;
+}
+
+.inner-playlist-music-card-main {
+    display: flex;
+    color: #24242E;
+}
+
+.my-playlist-music-cover-title-artist {
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.my-playlist-music-card-time-like-others {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.my-playlist-music-card-cover {
+    width: 67px;
+    height: 67px;
+    border-radius: 10px;
+    margin-right: 25px;
+    background-color: grey;
+}
+
+.my-playlist-music-card-title-artist p {
+    margin: 3px;
+}
+
+.my-playlist-music-card-title-artist p:first-child {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.my-playlist-music-card-title-artist p:nth-child(2) {
+    font-size: 13px;
+}

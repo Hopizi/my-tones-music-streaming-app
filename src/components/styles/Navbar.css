@@ -80,3 +80,9 @@
 .user-name p {
     margin-right: 14px;
 }
+
+.navbar-login {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}

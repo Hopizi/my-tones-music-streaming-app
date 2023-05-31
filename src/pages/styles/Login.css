@@ -1,0 +1,138 @@
+.login-page-main-container {
+    min-height: 100vh;
+    background-color: #e5e5e5;
+}
+
+.login-page-header {
+    height: 15vh;
+    background-color: #fff;
+    padding: 0 55px;
+}
+
+.login-inner-logo-text-contianer h1 {
+    font-size: 30px;
+    color: #4343EF;
+}
+
+.login-inner-logo-text-contianer {
+    display: flex;
+    align-items: center;
+    margin-top: 9px;
+}
+
+.login-logo-contianer {
+    width: 54px;
+    height: 54px;
+    background-color: #4343EF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.login-page-row-2 {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+}
+
+.login-page-main {
+    width: 50%;
+    height: 100%;
+    margin-top: 50px;
+    padding: 0 55px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.login-with-external {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f5;
+}
+
+.login-with-external h1 {
+    text-align: center;
+    font-size: 35px;
+}
+
+.inner-login-with-external {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.login-with-email {
+    border-bottom: 2px solid #f0f0f5;
+    display: flex;
+    justify-content: center;
+}
+
+.form-login-with-email {
+    width: 50%;
+    margin-top: 30px;
+}
+
+.actual-forms {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.actual-forms label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.actual-forms input {
+     width: 95%;
+    height: 38px;
+    border: 1px solid grey;
+    font-size: 17px;
+    font-family: inherit;
+    padding: 3px 10px;
+}
+
+.actual-forms input:focus {
+    outline: none;
+}
+
+.remeber-me-login {
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.remeber-me-login p{
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.password-forgot {
+    text-align: center;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.login-dont-have-acct {
+    display: flex;
+    justify-content: center;
+    margin: 60px 0;
+}
+
+.login-dont-have-acct p {
+    margin: 0 3px;
+}
+
+.password-show-hide {
+    position: relative;
+}
+
+.show-hide {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+}
