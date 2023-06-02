@@ -37,7 +37,7 @@ function Sidebar({setSelectedLink}) {
                 <p>LIBRARY</p>
                 {
                     libraryLinks.map((libraryLink, index) => {
-                        return <li key={index} onClick={() => setSelectedLink(libraryLink.title)}>{<libraryLink.icon style={iconsStyle}/>}{libraryLink.title}</li>
+                        return <Link to={libraryLink.path}><li key={index} onClick={() => setSelectedLink(libraryLink.title)}>{<libraryLink.icon style={iconsStyle}/>}{libraryLink.title}</li></Link>
                     })
                 }
             </ul>
@@ -45,7 +45,7 @@ function Sidebar({setSelectedLink}) {
                 <p>PLAYLIST</p>
                 {
                     playlistsLinks.map((playlistLink, index) => {
-                        return <li key={index} onClick={() => setSelectedLink(playlistLink.title)}>{<playlistLink.icon style={iconsStyle}/>}{playlistLink.title}</li>
+                        return <Link to={playlistLink.path}><li key={index} onClick={() => setSelectedLink(playlistLink.title)}>{<playlistLink.icon style={iconsStyle}/>}{playlistLink.title}</li></Link>
                     })
                 }
             </ul>

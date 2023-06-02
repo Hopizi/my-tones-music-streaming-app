@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './styles/Settings.css'
 import { Button } from '../components'
 import { ProfilePic, ProfilePicHolder } from '../assets/navbar-icons'
@@ -7,9 +7,13 @@ import { doc, setDoc, collection, addDoc, serverTimestamp, updateDoc } from "fir
 import { auth, db, storage } from '../config/firebase'
 import { ref, uploadBytesResumable , getDownloadURL} from "firebase/storage"
 import { Sidebar, Navbar, Top100Weekly, NowPlaying,} from '../components' 
+import { AuthContext } from '../context/AuthenticationContext'
 
 
-function Settings({userData}) {
+function Settings() {
+
+    const {userData} = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext);
 
     const [image, setImage] = useState('')
     const [data, setData] = useState({
@@ -17,6 +21,7 @@ function Settings({userData}) {
         lastName: "",
         language: "",
         playerPosition: "",
+        userName: ""
     })
     const [percetage, setPercentage] = useState(null)
 
@@ -57,6 +62,17 @@ function Settings({userData}) {
 
         image && uploadFile();
     }, [image])
+
+    useEffect(() => {
+        setData({
+            firstName: userData && userData.firstName ? userData.firstName : '',
+            lastName: userData && userData.lastName ? userData.lastName : '',
+            language: userData && userData.language ? userData.language : "",
+            playerPosition: userData && userData.playerPosition ? userData.playerPosition : "",
+            userName: userData && userData.userName ? userData.userName : ""
+        })
+
+    }, [userData])
 
 
     function handleChange(e) {
@@ -105,7 +121,7 @@ function Settings({userData}) {
             <div className='personal-settings'>
                 <div className='user-profile-pic-settings'>
                     <div className='user-profile-pic-settings-container'>
-                        <img src={image ? URL.createObjectURL(image) : ProfilePicHolder}/>
+                        <img src={image ? URL.createObjectURL(image) : userData?.img}/>
                         <div className='camera-icon-container'>
                             <label htmlFor='fileUpload' className='camera-icon'>
                                 <Camera /> 
@@ -119,26 +135,46 @@ function Settings({userData}) {
                         </div>  
                     </div>
                     <div className='user-profile-pic-info-settings'>
-                        <p>Ryan Azhari</p>
+                        <p>{userData?.userName}</p>
                         <p>MyTones Premium</p>
                     </div>
                 </div>
                 <div className='user-personal-info-settings'>
                     <div>
                         <label>First Name</label>
-                        <input type='text' name='firstName' onChange={handleChange}/>
+                        <input 
+                        type='text'
+                        name='firstName' 
+                        onChange={handleChange}
+                        value={data.firstName}
+                        />
                     </div>
                     <div>
                         <label>Last Name</label>
-                        <input type='text' name='lastName' onChange={handleChange}/>
+                        <input 
+                        type='text' 
+                        name='lastName' 
+                        onChange={handleChange}
+                        value={data.lastName}
+                        />
                     </div>
                     <div>
                         <label>Username</label>
-                        <input type='text' name='userName' onChange={handleChange}/>
+                        <input 
+                        type='text' 
+                        name='userName' 
+                        onChange={handleChange}
+                        value={data.userName}
+                        />
                     </div>
                     <div>
                         <label>Email Adresss</label>
-                        <input type='text' name='email' onChange={handleChange}/>
+                        <input 
+                        type='text' 
+                        name='email' 
+                        onChange={handleChange}
+                        value={userData && userData.email}
+                        />
                     </div>
                 </div>
             </div>
@@ -147,7 +183,11 @@ function Settings({userData}) {
                     <p>Language</p>
                     <div className='inner-language-section'>
                         <p>Set Prefrreed Language</p>
-                        <select name='language' onChange={handleChange}>
+                        <select 
+                        name='language' 
+                        onChange={handleChange} 
+                        value={data.language}
+                        >
                             <option>English</option>
                             <option>French</option>
                             <option>Russian</option>
@@ -165,7 +205,10 @@ function Settings({userData}) {
                 </div>
                 <div className='music-player-positon'>
                     <p>Music Player Position</p>
-                    <select name='playerPosition' onChange={handleChange}>
+                    <select 
+                    name='playerPosition' 
+                    onChange={handleChange} 
+                    value={data.playerPosition}>
                         <option>Right Side</option>
                         <option>Bottom Of Page</option>
                     </select>

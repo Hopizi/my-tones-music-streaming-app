@@ -9,50 +9,18 @@ import { Router ,Route, Routes } from 'react-router-dom'
 
 function HomePage() {
 
-    const [selectedLink, setSelectedLink] = useState("Discover")
-
-    const {currentUser} = useContext(AuthContext)
-    const [userNavData ,setUserNavData] = useState()
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const userId = currentUser.uid;
-
-            let userData = []
-            
-            const docRef = doc(db, "users", userId);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                userData = docSnap.data()
-                setUserNavData(userData)
-            } else {
-            console.log("No such document!");
-            }
-        }
-        fetchData();
-    }, [])
-
-    useEffect(() => {
-        console.log(userNavData);
-    }, [userNavData]);
-
-
-
   return (
         <div className='home-page-main-container'>
             <div className="sidebar-container">
-                <Sidebar setSelectedLink={setSelectedLink}/>
+                <Sidebar />
             </div>
             <div className='col-2-main'>
                 <div className="user-navbar">
-                    <Navbar navUserData={userNavData}/>
+                    <Navbar />
                 </div>
                 <div className="music-space-main">
                     <div className='main-page-display'>
-                        <Routes>
-                            <Route path="/explore" element={<Explore />} />
-                        </Routes>
+                        <Discover />
                     </div>
                     <div className='main-page-col-2'>
                         <div className="top-100-main">

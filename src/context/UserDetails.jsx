@@ -1,48 +1,44 @@
-// import React, { Children } from 'react'
-// import { createContext, useEffect, useState, useContext } from 'react'
-// import { AuthContext } from '../context/AuthenticationContext'
-// import { db } from '../config/firebase'
-// import { doc, getDoc } from 'firebase/firestore';
+import React, { Children } from 'react'
+import { createContext, useEffect, useState, useContext } from 'react'
+import { AuthContext } from '../context/AuthenticationContext'
+import { db } from '../config/firebase'
+import { doc, getDoc } from 'firebase/firestore';
 
 
-// export const UserDetailsContext = createContext(null);
+export const UserDetailsContext = createContext(null);
 
-// export const UserDetailsContextProvider = ({children}) => {
+export const UserDetailsContextProvider = ({children}) => {
 
-//     const {currentUser} = useContext(AuthContext)
-//     const [userNavData ,setUserNavData] = useState()
+    const {currentUser} = useContext(AuthContext)
+    const [userNavData ,setUserNavData] = useState()
 
-//     useEffect(() => {
-//         const fetchData = async () => {
-//             const userId = currentUser.uid;
+    useEffect(() => {
+        const fetchData = async () => {
+            const userId = currentUser.uid;
 
-//             let userData = []
+            let userData = []
             
-//             const docRef = doc(db, "users", userId);
-//             const docSnap = await getDoc(docRef);
+            const docRef = doc(db, "users", userId);
+            const docSnap = await getDoc(docRef);
 
-//             if (docSnap.exists()) {
-//                 userData = docSnap.data()
-//                 setUserNavData(userData)
-//             } else {
-//             console.log("No such document!");
-//             }
-//         }
-//         fetchData();
-//     }, [])
+            if (docSnap.exists()) {
+                userData = docSnap.data()
+                setUserNavData(userData)
+            } else {
+            console.log("No such document!");
+            }
+        }
+        fetchData();
+    }, [])
 
-//     useEffect(() => {
-//         console.log(userNavData);
-//     }, [userNavData]);
+    const userDetailsContextValue = {
+        userNavData
+    }
 
-//     const userDetailsContextValue = {
-//         userNavData
-//     }
+    return (
+        <UserDetailsContext.Provider value={userDetailsContextValue}>
+            {children}
+        </UserDetailsContext.Provider>
+    )
 
-//     return (
-//         <UserDetailsContext.Provider value={userDetailsContextValue}>
-//             {Children}
-//         </UserDetailsContext.Provider>
-//     )
-
-// }
+}

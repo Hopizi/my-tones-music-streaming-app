@@ -3,6 +3,8 @@ import { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, googleProvider } from '../config/firebase'
 import {createUserWithEmailAndPassword, signInWithPopup, signOut, signInWithEmailAndPassword} from "firebase/auth"
+import { db } from '../config/firebase'
+import { doc, getDoc } from 'firebase/firestore';
 
 export const AuthContext = createContext(null);
 
@@ -12,6 +14,7 @@ export const AuthContextProvider = ({children}) => {
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
   const [error, setError] = useState(false)
+  const [userData ,setUserData] = useState()
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser))
@@ -49,12 +52,32 @@ export const AuthContextProvider = ({children}) => {
         navigate("/login")
     }
 
+  useEffect(() => {
+        const fetchData = async () => {
+            const userId = currentUser.uid;
+
+            let userData = []
+            
+            const docRef = doc(db, "users", userId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                userData = docSnap.data()
+                setUserData(userData)
+            } else {
+            console.log("No such document!");
+            }
+        }
+        fetchData();
+    }, [])
+
   const authContextValue = {
     currentUser,
     error,
     signIn,
     signInWithGoogle,
-    logOut
+    logOut,
+    userData
   }
 
   return (

@@ -8,34 +8,16 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthenticationContext'
 import { db } from '../config/firebase'
 import { doc, getDoc } from 'firebase/firestore';
+import { UserDetailsContext } from '../context/UserDetails'
 
 function Navbar({navUserData}) {
 
     const {currentUser} = useContext(AuthContext)
-    // const [userNavData ,setUserNavData] = useState()
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const userId = currentUser.uid;
-
-    //         let userData = []
-            
-    //         const docRef = doc(db, "users", userId);
-    //         const docSnap = await getDoc(docRef);
-
-    //         if (docSnap.exists()) {
-    //             userData = docSnap.data()
-    //             setUserNavData(userData)
-    //         } else {
-    //         console.log("No such document!");
-    //         }
-    //     }
-    //     fetchData();
-    // }, [])
-
-    // useEffect(() => {
-    //     console.log(userNavData);
-    // }, [userNavData]);
+    const {userData} = useContext(AuthContext)
+    
+    useEffect(() => {
+        console.log(userData)
+    }, userData)
 
 
   return (
@@ -70,10 +52,10 @@ function Navbar({navUserData}) {
                     </div>
                     <div className='user-info-section'>
                         <div className="user-profile-pic">
-                            <img src={navUserData?.img}/>
+                            <img src={userData?.img}/>
                         </div>
                         <div className="user-name">
-                            <p>{navUserData?.userName}</p>
+                            <p>{userData?.userName}</p>
                             <DropDown />
                         </div>
                     </div>
