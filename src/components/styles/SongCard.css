@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     padding: 0 24px;
-    justify-content: space-between;
 }
 
 .artist-name {
@@ -44,3 +43,20 @@
 .dot {
     margin: 0 2px;
 }
+
+.all-song-info {
+    width: 70%;
+}
+
+.song-position-container {
+    width: 10%;
+}
+
+.song-duration-container {
+    width: 13%;
+}
+
+.dot-container {
+    width: 7%;
+}
+

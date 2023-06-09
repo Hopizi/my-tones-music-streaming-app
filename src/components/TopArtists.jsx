@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./styles/TopArtists.css"
 import TopArtistsCard from './TopArtistsCard'
+import {topArtists} from "../api/TopArtists"
 
 function TopArtists() {
+
+  const [topsixArtists, setTopSixArtist] = useState()
+
+  useEffect(() => {
+    setTopSixArtist(topArtists.data);
+  }, topsixArtists)
+
   return (
     <div className='top-artists-column'>
         <div className='top-artist-title'>
@@ -11,12 +19,15 @@ function TopArtists() {
         </div>
         <div className='top-artist-list-main'>
             <div className='actual-top-artists-list'>
-              <TopArtistsCard />
-              <TopArtistsCard />
-              <TopArtistsCard />
-              <TopArtistsCard />
-              <TopArtistsCard />
-              <TopArtistsCard />
+              {
+                topsixArtists && 
+                topsixArtists.map((artist, idx) => {
+                  return <TopArtistsCard 
+                  topArtistCover={artist.picture_medium}
+                  topArtistName={artist.name}
+                  />
+                })
+              }
             </div>
         </div>
     </div>

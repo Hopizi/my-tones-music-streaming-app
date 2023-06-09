@@ -2,20 +2,37 @@ import React from 'react'
 import "./styles/SongCard.css"
 import {MusicPic, Dot} from "../assets/top100-icons"
 
-function SongCard() {
+
+function SongCard({songCover, songTitle, songArtist, songDuration, songPosition}) {
+
+  function shortenTitle(str) {
+    let length = 19;
+    let ending = '...';
+
+    if (str.length > length) {
+      return str.substring(0, length - ending.length) + ending;
+    }else {
+      return str;
+    }
+  }
+
   return (
     <div className='song-card-main'>
-        <p className='song-index'>01</p>
+        <div className='song-position-container'>
+            <p className='song-index'>{songPosition}</p>
+        </div>
         <div className='all-song-info'>
             <div className="song-cover">
-            <img src={MusicPic}/>
+            <img src={songCover}/>
             </div>
             <div className="title-artist">
-                <p className='song-title'>Anyone</p>
-                <p className='artist-name'>Justin Bieber</p>
+                <p className='song-title'>{shortenTitle(songTitle)}</p>
+                <p className='artist-name'>{songArtist}</p>
             </div>
         </div>
-        <p>03:11</p>
+        <div className='song-duration-container'>
+            <p>3:11</p>
+        </div>
         <div className="dot-container">
             <Dot className='dot'/>
             <Dot className='dot'/>

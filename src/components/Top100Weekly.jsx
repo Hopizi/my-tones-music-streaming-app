@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./styles/Top100Weekly.css"
 import SongCard from './SongCard'
+import {tracks} from "../api/Chart"
 
 function Top100Weekly() {
+
+  const [topTen, setTopTen] = useState()
+
+  useEffect(() => {
+    setTopTen(tracks.data)
+    console.log(topTen)
+  }, topTen)
+
   return (
     <div className='top-100-main-container'>
         <div className='top-header-sect'>
@@ -10,9 +19,16 @@ function Top100Weekly() {
             <p>More list</p>
         </div>
         <div className='songs-card-container'>
-            <SongCard />
-            <SongCard />
-            <SongCard />
+            { topTen && 
+              topTen.map((song, idx) => {
+                return <SongCard 
+                songCover={song.cover_big}
+                songArtist={song.artist.name}
+                songTitle={song.title}
+                songPosition={song.position}
+                />
+              })
+            }
         </div>
     </div>
   )

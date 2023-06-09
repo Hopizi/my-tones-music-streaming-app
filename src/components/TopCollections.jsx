@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./styles/TopCollections.css"
 import TopCollectionCard from './TopCollectionCard'
+import {genres} from "../api/Genres"
 
 function TopCollections() {
+    
+  const [genreinfo, setGenreInfo] = useState()
+
+  useEffect(() => {
+    setGenreInfo(genres.data)
+  }, genreinfo)
+
   return (
     <div className='top-collections-main'>
         <div className='top-collections-header-section'>
@@ -11,12 +19,14 @@ function TopCollections() {
         </div>
         <div className='top-collections'>
             <div className='top-collection-actual-section'>
-                <TopCollectionCard />
-                <TopCollectionCard />
-                <TopCollectionCard />
-                <TopCollectionCard />
-                <TopCollectionCard />
-                <TopCollectionCard />   
+                {
+                  genreinfo && 
+                  genreinfo.map((genre, idx) => {
+                      return <TopCollectionCard 
+                      genreCover={genre.picture_big}
+                      />
+                  })
+                } 
             </div>
         </div>
     </div>
