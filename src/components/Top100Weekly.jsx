@@ -9,8 +9,7 @@ function Top100Weekly() {
 
   useEffect(() => {
     setTopTen(tracks.data)
-    console.log(topTen)
-  }, topTen)
+  }, [])
 
   return (
     <div className='top-100-main-container'>

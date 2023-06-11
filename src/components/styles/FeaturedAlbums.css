@@ -16,5 +16,14 @@
 
 .featured-albums-display {
     display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
+.featured-albums-display::-webkit-scrollbar {
+    display: none;
+}

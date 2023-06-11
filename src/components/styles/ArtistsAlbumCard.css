@@ -2,16 +2,23 @@
     width: 140px;
     height: 140px;
     border-radius: 10px;
-    background-color: grey;
+}
+
+.artist-album-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
 }
 
 .artist-album-card-info p {
     margin: 4px;
     color: #4d4d45;
+    word-break: break-all;
 }
 
 .artist-album-card-info p:first-child {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -20,5 +27,6 @@
 }
 
 .artist-album-card-main {
-    /* margin-right: 13px; */
+    margin: 15px 0;
+    width: 140px;
 }

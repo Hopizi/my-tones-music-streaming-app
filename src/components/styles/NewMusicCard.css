@@ -1,12 +1,18 @@
 .new-music-card-main-cover-img {
     width: 145px;
     height: 145px;
-    background-color: gray;
+    cursor: pointer;
+}
+
+.new-music-card-main-cover-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
 }
 
 .new-music-card-info p:first-child {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: #4d4d56;
     margin: 3px;

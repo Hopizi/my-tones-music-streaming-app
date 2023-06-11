@@ -5,13 +5,20 @@
     background-color: gray;
 }
 
+.albums-card-main-cover img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 .albums-card-main-info p {
     margin: 3px;
     color:#24242F;
 }
 
 .albums-card-main-info p:first-child {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 

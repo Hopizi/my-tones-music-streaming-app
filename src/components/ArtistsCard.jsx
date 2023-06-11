@@ -1,13 +1,13 @@
 import React from 'react'
 import "./styles/ArtistsCard.css"
 
-function ArtistsCard() {
+function ArtistsCard({artistCover, artistName, id, onClick}) {
   return (
-    <div className='artists-card-main-container'>
+    <div className='artists-card-main-container' onClick={onClick}>
         <div className='artists-card-cover-image'>
-            
+            <img src={artistCover}/>
         </div>
-        <p>Ed Sheeran</p>
+        <p>{artistName}</p>
     </div>
   )
 }

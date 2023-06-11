@@ -2,9 +2,16 @@
     width: 335px;
     height: 200px;
     border-radius: 10px;
-    background-color: grey;
     position: relative;
     margin-right: 13px;
+    flex-shrink: 0;
+}
+
+.featured-album-card-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .featured-album-card-info {
