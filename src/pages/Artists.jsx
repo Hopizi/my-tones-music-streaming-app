@@ -33,6 +33,9 @@ import {
   asake,
   selenaGomez,
 } from "../api/ArtistsSongs";
+import {doc, setDoc} from "firebase/firestore"
+import { db, storage } from "../config/firebase";
+import { tracks } from "../api/Chart";
 
 function Artists() {
 
@@ -51,6 +54,17 @@ function Artists() {
     }
 
     useEffect(() => {
+      if(artists) {
+        const handleAdd = async () => {
+          await setDoc(doc(db, "music", "tracks"), {
+            ...tracks
+          })
+        }
+        handleAdd();
+      }
+    },[])
+
+    useEffect(() => {
         const info = selectedInfo()
         if (info) {
             const { object, artist } = info;
@@ -59,6 +73,8 @@ function Artists() {
             console.log(artist)
         }
     }, [selectedArtist])
+
+
 
     const selectedInfo = () => {
         switch(selectedArtist) {

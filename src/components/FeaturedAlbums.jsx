@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './styles/FeaturedAlbums.css'
 import FeaturedAlbumsCard from './FeaturedAlbumsCard'
 import {featuredAlbums} from "../api/Albums"
+import { db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function FeaturedAlbums() {
 
@@ -13,6 +15,27 @@ function FeaturedAlbums() {
     }
     console.log(featured);
   }, [featured])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const docRef = doc(db, "albums", "featuredAlbums");
+  //       const docSnapShot = await getDoc(docRef);
+
+  //       if (docSnapShot.exists()) {
+  //         const docData = docSnapShot.data();
+  //         console.log(docData)
+  //         setFeatured(docData);
+  //       } else {
+  //         console.log("document does not exixts");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="featured-albums-main">

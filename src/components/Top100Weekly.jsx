@@ -2,14 +2,32 @@ import React, { useEffect, useState } from 'react'
 import "./styles/Top100Weekly.css"
 import SongCard from './SongCard'
 import {tracks} from "../api/Chart"
+import { db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function Top100Weekly() {
 
   const [topTen, setTopTen] = useState()
 
   useEffect(() => {
-    setTopTen(tracks.data)
-  }, [])
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "music", "tracks");
+        const docSnapShot = await getDoc(docRef);
+
+        if (docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+         setTopTen(docData.data);
+        } else {
+          console.log("document does not exixts");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className='top-100-main-container'>

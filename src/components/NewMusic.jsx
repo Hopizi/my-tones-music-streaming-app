@@ -2,15 +2,38 @@ import React, { useEffect, useState } from 'react'
 import "./styles/NewMusic.css"
 import NewMusicCard from './NewMusicCard'
 import {newMusic} from "../api/Music"
+import { db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function NewMusic() {
 
   const [music, setMusic] = useState()
 
+  // useEffect(() => {
+  //   setMusic(newMusic);
+  // }, [])
+
+
   useEffect(() => {
-    setMusic(newMusic);
-    console.log(newMusic)
-  }, music)
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "music", "newMusic");
+        const docSnapShot = await getDoc(docRef);
+
+        if (docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+          setMusic(docData.data);
+        } else {
+          console.log("document does not exixts");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <div className='new-music-main-container'>

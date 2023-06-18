@@ -2,14 +2,36 @@ import React, { useEffect, useState } from 'react'
 import "./styles/TopArtists.css"
 import TopArtistsCard from './TopArtistsCard'
 import {topArtists} from "../api/TopArtists"
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../config/firebase'
 
 function TopArtists() {
 
   const [topsixArtists, setTopSixArtist] = useState()
 
+  // useEffect(() => {
+  //   setTopSixArtist(topArtists.data);
+  // }, topsixArtists)
+
   useEffect(() => {
-    setTopSixArtist(topArtists.data);
-  }, topsixArtists)
+    const fetchData = async () => {
+      try{
+        const docRef = doc(db, "artist", "topArtists");
+        const docSnapShot = await getDoc(docRef)
+
+        if(docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+          setTopSixArtist(docData.data)
+        } else {
+          console.log("document does not exixts")
+        }
+      }catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchData()
+  },[])
 
   return (
     <div className='top-artists-column'>

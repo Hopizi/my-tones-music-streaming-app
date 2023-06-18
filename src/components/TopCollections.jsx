@@ -2,14 +2,32 @@ import React, { useEffect, useState } from 'react'
 import "./styles/TopCollections.css"
 import TopCollectionCard from './TopCollectionCard'
 import {genres} from "../api/Genres"
+import { db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function TopCollections() {
     
   const [genreinfo, setGenreInfo] = useState()
 
   useEffect(() => {
-    setGenreInfo(genres.data)
-  }, genreinfo)
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "music", "genres");
+        const docSnapShot = await getDoc(docRef);
+
+        if (docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+          setGenreInfo(docData.data)
+        } else {
+          console.log("document does not exixts");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className='top-collections-main'>
