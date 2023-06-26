@@ -3,6 +3,14 @@
     border-radius: 24px;
 }
 
+#dark {
+    --main-page-row-2-background-color: #060404;
+}
+
+.main-page-row-3-col-1, .main-page-row-3-col-2, .main-page-row-2 {
+    background-color: var(--main-page-row-2-background-color);
+}
+
 .main-page-row-3 {
     margin: 24px 0;
     display: flex;

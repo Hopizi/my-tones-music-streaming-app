@@ -13,6 +13,7 @@ import TopCollectionCard from "./TopCollectionCard";
 import TopGenres from "./TopGenres";
 import FeaturedAlbums from "./FeaturedAlbums";
 import FeaturedAlbumsCard from "./FeaturedAlbumsCard";
+import FeaturedAlbumInfo from "./FeaturedAlbumInfo";
 import NewMusic from "./NewMusic";
 import NewMusicCard from "./NewMusicCard";
 import PlaylistsExplore from "./PlaylistsExplore";
@@ -23,6 +24,8 @@ import ArtistsCard from "./ArtistsCard";
 import ArtistsAlbumCard from "./ArtistsAlbumCard";
 import PlaylistsMusicCard from "./PlaylistsMusicCard";
 import ContinueWith from "./ContinueWith";
+import MusicPlayer from "./MusicPlayer";
+import AlbumMusicCard from "./AlbumMusicCard";
 
 
 export {
@@ -41,6 +44,7 @@ export {
     TopGenres,
     FeaturedAlbums,
     FeaturedAlbumsCard,
+    FeaturedAlbumInfo,
     NewMusic,
     NewMusicCard,
     PlaylistsExplore,
@@ -50,5 +54,7 @@ export {
     ArtistsCard,
     ArtistsAlbumCard,
     PlaylistsMusicCard,
-    ContinueWith
+    ContinueWith,
+    MusicPlayer,
+    AlbumMusicCard
 }

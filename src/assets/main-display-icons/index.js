@@ -9,6 +9,8 @@ import {ReactComponent as Apple} from "./apple.svg"
 import {ReactComponent as Show} from "./eye-solid.svg"
 import {ReactComponent as Hide} from "./eye-slash-solid.svg"
 import {ReactComponent as ProfileHolder} from "./profile-holder.svg"
+import {ReactComponent as HeartLike} from "./like-fill.svg"
+import {ReactComponent as GoBack} from "./angle-left-solid.svg"
 
 export {
     Play,
@@ -21,5 +23,7 @@ export {
     Apple,
     Show,
     Hide,
-    ProfileHolder
+    ProfileHolder,
+    HeartLike,
+    GoBack
 }

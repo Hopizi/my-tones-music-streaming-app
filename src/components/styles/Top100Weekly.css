@@ -13,3 +13,10 @@
 .top-header-sect p {
     margin-top: 0;
 }
+
+.top-100-main-container {
+    background-color: #fff;
+    border-radius: 24px 0px 0px 24px;
+    height: 580px;
+    overflow-y: auto;
+}

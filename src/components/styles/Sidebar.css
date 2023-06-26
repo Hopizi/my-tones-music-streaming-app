@@ -2,11 +2,32 @@
     height: 100%;
 }
 
+.side-bar-main-container ul {
+    padding-left: 0;
+}
+
+.side-bar-main-container ul p {
+    padding-left: 40px;
+}
+
 .side-bar-main-container ul li {
     list-style: none;
-    padding: 6px 0;
+    padding: 7px 0px;
+    padding-left: 40px;
     font-size: 15px;
     cursor: pointer;
+    /* border: 1px solid; */
+    max-width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.side-bar-main-container ul li:hover {
+    background-color: #f0f0f5;
+}
+
+#dark .side-bar-main-container ul li:hover {
+    background-color: none;
 }
 
 .inner-logo-text-contianer h1 {
@@ -33,4 +54,13 @@
     justify-content: center;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+.list-indicator {
+    height: 100%;
+    width: 4px;
+    background-color: #4343EF;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

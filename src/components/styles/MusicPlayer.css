@@ -1,0 +1,80 @@
+.music-player-main-container {
+    height: 70px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.inner-music-player {
+    margin: 0 10px;
+    height: 100%; 
+    display: flex;
+    background-color: #f9f7f7;
+    border-radius: 10px 10px 0px 0;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-1 {
+    display: flex;
+    width: 100%;
+    height: 97%;
+}
+
+.inner-music-player-col-1 {
+    display: flex;
+    width: 70%;
+    padding-top: 2px;
+}
+
+.inner-music-player-col-2 {
+    width: 30%;
+}
+
+.current-song-image {
+    width: 55px;
+    height: 55px;
+    border-radius: 18px;
+    margin-right: 20px;
+}
+
+.current-song-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.current-music-title {
+    font-size: 11px;
+}
+
+.current-music-controls {
+    height: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.current-music-title h2 {
+    margin-bottom: 0;
+}
+
+.current-music-title p {
+    margin-top: 3px;
+}
+
+.song-progress {
+    border: 1px solid #4343ef;
+    height: 2%;
+    margin-top: 4px;
+}
+
+.next-previous {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}

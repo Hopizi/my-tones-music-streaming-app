@@ -5,6 +5,11 @@
     margin-bottom: 7px;
 }
 
+.main-page-display {
+    /* border: 1px solid; */
+    position: relative;
+}
+
 .favourite-header-section h1 {
     font-size: 24px;
     color: #4343ef;
@@ -42,4 +47,9 @@
 .favourite-cards-container {
     display: flex;
     flex-direction: column;
+}
+
+.favourite-songs {
+    overflow-y: auto;
+    height: 474px;
 }

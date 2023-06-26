@@ -5,37 +5,29 @@ import {featuredAlbums} from "../api/Albums"
 import { db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-function FeaturedAlbums() {
-
+function FeaturedAlbums({ setAlbumClicked, setClicked }) {
   const [featured, setFeatured] = useState();
 
   useEffect(() => {
-    if (featuredAlbums) {
-      setFeatured(featuredAlbums);
-    }
-    console.log(featured);
-  }, [featured])
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "albums", "featuredAlbums");
+        const docSnapShot = await getDoc(docRef);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const docRef = doc(db, "albums", "featuredAlbums");
-  //       const docSnapShot = await getDoc(docRef);
+        if (docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+          const dataArray = Object.values(docData);
+          setFeatured(dataArray);
+        } else {
+          console.log("document does not exixts");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //       if (docSnapShot.exists()) {
-  //         const docData = docSnapShot.data();
-  //         console.log(docData)
-  //         setFeatured(docData);
-  //       } else {
-  //         console.log("document does not exixts");
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   return (
     <div className="featured-albums-main">
@@ -44,15 +36,21 @@ function FeaturedAlbums() {
         <p className="explore-header-title-2">See All</p>
       </div>
       <div className="featured-albums-display">
-        { featured &&
+        {featured &&
           featured.map((album, idx) => {
-            return (<FeaturedAlbumsCard 
-            albumArtist={album.artist.name}
-            albumTitle={album.title}
-            albumCover={album.cover_big}
-            />)
-          })
-          }
+            return (
+              <FeaturedAlbumsCard
+                albumArtist={album.artist.name}
+                albumTitle={album.title}
+                albumCover={album.cover_big}
+                key={idx}
+                onClick={() => {
+                  setAlbumClicked(album);
+                  setClicked(true);
+                }}
+              />
+            );
+          })}
       </div>
     </div>
   );

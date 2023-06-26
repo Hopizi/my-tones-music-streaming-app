@@ -42,4 +42,7 @@
 .my-music-cards-container {
     display: flex;
     flex-direction: column;
+    height: 520px;
+    overflow-y: auto;
 }
+

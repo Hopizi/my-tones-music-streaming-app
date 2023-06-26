@@ -1,8 +1,7 @@
 import React from 'react'
 import "./styles/NewMusicCard.css"
 
-function NewMusicCard({musicArtist, musicTitle, musicCover}) {
-
+function NewMusicCard({ musicArtist, musicTitle, musicCover, playSong, songCurrentStyle }) {
   function shortenTitle(str) {
     let length = 17;
     let ending = "...";
@@ -15,16 +14,16 @@ function NewMusicCard({musicArtist, musicTitle, musicCover}) {
   }
 
   return (
-    <div className='new-music-card-main'>
-        <div className='new-music-card-main-cover-img'>
-          <img src={musicCover}/>
-        </div>
-        <div className="new-music-card-info">
-            <p>{shortenTitle(musicTitle)}</p>
-            <p>{musicArtist}</p>
-        </div>
+    <div className="new-music-card-main" onClick={playSong}>
+      <div className="new-music-card-main-cover-img">
+        <img src={musicCover} />
+      </div>
+      <div className="new-music-card-info">
+        <p style={songCurrentStyle}>{shortenTitle(musicTitle)}</p>
+        <p>{musicArtist}</p>
+      </div>
     </div>
-  )
+  );
 }
 
 export default NewMusicCard

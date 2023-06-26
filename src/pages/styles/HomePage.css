@@ -34,11 +34,8 @@
 
 .main-page-col-2 {
     width: 35%;
-    background-color: #fff;
-    border-radius: 24px 0px 0px 0px;
     display: flex;
     flex-direction: column;
-    height: 91vh;
 }
 
 .now-playing-main-container {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./styles/Artists.css";
 import {
   ArtistsCard,
@@ -8,61 +8,67 @@ import {
   Navbar,
   Top100Weekly,
   NowPlaying,
+  MusicPlayer
 } from "../components";
 import { Shuffle } from "../assets/main-display-icons";
 import { Play } from "../assets/now-playing-icons";
 import {artists} from "../api/Artists"
-import {
-  theWeeknd,
-  taylorSwift,
-  mileyCirus,
-  maroon5,
-  drake,
-  arianaGrande,
-  lilDurk,
-  edSheeran,
-  nickiMinaj,
-  cardiB,
-  badBunny,
-  burnaBoy,
-  wizkid,
-  davido,
-  rema,
-  iceSpice,
-  rihana,
-  asake,
-  selenaGomez,
-} from "../api/ArtistsSongs";
-import {doc, setDoc} from "firebase/firestore"
+import {doc, getDoc, setDoc} from "firebase/firestore"
 import { db, storage } from "../config/firebase";
-import { tracks } from "../api/Chart";
+import { CurrentSongContext } from "../context/CurrentSong";
+import {motion} from "framer-motion"
+import { ThemeContext } from "../context/DarkMode";
 
 function Artists() {
+
+  const { getClickedSong } = useContext(CurrentSongContext);
+  const { theme } = useContext(ThemeContext);
+  const {playAlbumSong} = useContext(CurrentSongContext)
 
     const [artistsCard, setArtistCard] = useState()
     const [artistInfo, setArtistInfo] = useState()
     const [selectedArtist, setSelectedArtist] = useState()
     const [artistSongs, setArtistSongs] = useState()
     const [actualArtist, setActualArtist] = useState()
+    const [isArtistClicked, setIsArtistClicked] = useState(false);
 
-    useEffect(() => {
-        setArtistCard(artists)
-    }, [])
+    // useEffect(() => {
+    //     setArtistCard(artists)
+    // }, [])
 
     const selectArtist = (id) => {
         setSelectedArtist(id);
     }
 
     useEffect(() => {
-      if(artists) {
-        const handleAdd = async () => {
-          await setDoc(doc(db, "music", "tracks"), {
-            ...tracks
-          })
+      const fetchData = async () => {
+        try {
+          const docRef = doc(db, "artist", "artists");
+          const docRef1 = doc(db, "artist", "artistsSongs");
+
+          const docSnapShot = await getDoc(docRef);
+          const docSnapShot1 = await getDoc(docRef1);
+
+          if (docSnapShot.exists() && docSnapShot1.exists()) {
+            const docData = docSnapShot.data();
+            const docData1 = docSnapShot1.data()
+
+            const dataArray = Object.values(docData);
+            const dataArray1 = Object.values(docData1);
+
+            setArtistCard(dataArray);
+            setArtistInfo(dataArray1);
+
+          } else {
+            console.log("document does not exixts");
+          }
+        } catch (error) {
+          console.log(error);
         }
-        handleAdd();
-      }
-    },[])
+      };
+
+      fetchData();
+    }, []);
 
     useEffect(() => {
         const info = selectedInfo()
@@ -80,97 +86,97 @@ function Artists() {
         switch(selectedArtist) {
             case 4050205:
                 return {
-                    object: theWeeknd,
+                    object: artistInfo[0],
                     artist: artists[0]
                 };
             case 384236:
                 return {
-                    object: edSheeran,
+                    object: artistInfo[1],
                     artist: artists[1]
                 };
             case 12246:
                 return {
-                    object: taylorSwift,
+                    object: artistInfo[2],
                     artist: artists[2]
                 }
             case 12436:
                 return {
-                    object: mileyCirus,
+                    object: artistInfo[3],
                     artist: artists[3]
                 }
             case 564:
                 return {
-                    object: rihana,
+                    object: artistInfo[4],
                     artist: artists[4]
                 }
             case 1562681:
                 return {
-                    object: arianaGrande,
+                    object: artistInfo[5],
                     artist: artists[5]
                 }
             case 246791:
                 return {
-                    object: drake,
+                    object: artistInfo[6],
                     artist: artists[6]
                 }
             case 102426952:
                 return {
-                    object: iceSpice,
+                    object: artistInfo[7],
                     artist: artists[7]
                 }
             case 10583405:
                 return {
-                    object: badBunny,
+                    object: artistInfo[8],
                     artist: artists[8]
                 }
             case 3977201:
                 return {
-                    object: lilDurk,
+                    object: artistInfo[9],
                     artist: artists[9]
                 }
             case 125372:
                 return {
-                    object: davido,
+                    object: artistInfo[10],
                     artist: artists[10]
                 }
             case 3933641:
                 return {
-                    object: wizkid, 
+                    object: artistInfo[11], 
                     artist: artists[11]
                 }
             case 5259966:
                 return {
-                    object: rema,
+                    object: artistInfo[12],
                     artist: artists[12]
                 }
             case 51305922:
                 return {
-                    object: asake,
+                    object: artistInfo[13],
                     artist: artists[13]
                 }
             case 4338602:
                 return {
-                    object: burnaBoy,
+                    object: artistInfo[14],
                     artist: artists[14]
                 }
             case 292185:
                 return {
-                    object: selenaGomez,
+                    object: artistInfo[15],
                     artist: artists[15]
                 }
             case 1188:
                 return {
-                    object: maroon5,
+                    object: artistInfo[16],
                     artist: artists[16]
                 }
             case 9064930:
                 return {
-                    object: cardiB,
+                    object: artistInfo[17],
                     artist: artists[17]
                 }
             case 382937:
                 return {
-                    object: nickiMinaj, 
+                    object: artistInfo[18], 
                     artist: artists[18]
                 }
             default:
@@ -178,10 +184,14 @@ function Artists() {
         }
     }
 
+    const currentArtist = {
+      backgroundColor: "#f0f0f5",
+    };
+
   return (
-    <div className="home-page-main-container">
+    <div className="home-page-main-container" id={theme}>
       <div className="sidebar-container">
-        <Sidebar />
+        <Sidebar currentLink="Artists" />
       </div>
       <div className="col-2-main">
         <div className="user-navbar">
@@ -193,22 +203,37 @@ function Artists() {
               <div className="artists-main-header-section">
                 <h1>Artists</h1>
               </div>
-              <div className="artists-display-container">
-                <div className="main-artists-display-contianer">
-                  {
-                    artistsCard && 
+              <div className="artists-display-container" id={theme}>
+                <div
+                  className="main-artists-display-contianer"
+                  // style={isArtistClicked ? { width: "50%" } : {}}
+                >
+                  {artistsCard &&
                     artistsCard.map((artist, idx) => {
-                        return (<ArtistsCard 
-                        artistCover={artist.picture_big}
-                        artistName={artist.name}
-                        id={artist.id}
-                        onClick={() => selectArtist(artist.id)}
-                        />)
-                    })
-                  }
+                      return (
+                        <ArtistsCard
+                          artistCover={artist.picture_big}
+                          artistName={artist.name}
+                          id={artist.id}
+                          onClick={() => {
+                            selectArtist(artist.id);
+                            setIsArtistClicked(true);
+                          }}
+                          currentArtist={
+                            actualArtist?.id === artist.id && theme === 'light'
+                              ? { backgroundColor: "#f0f0f5" }
+                              : {}
+                          }
+                        />
+                      );
+                    })}
                 </div>
-                <div className="main-artists-info-display">
-                  <div className="main-artists-info-header">
+                <div
+                  className="main-artists-info-display"
+                  // style={isArtistClicked ? { width: "50%", visibility: "visible" } : {}}
+                id={theme}>
+                  <div className="overlay-albums" style={isArtistClicked ? {display: "none"} : {}} id={theme}></div>
+                  <div className="main-artists-info-header" id={theme}>
                     <div className="main-artists-info-header-text">
                       <p>{actualArtist?.name}</p>
                     </div>
@@ -224,16 +249,19 @@ function Artists() {
                     </div>
                   </div>
                   <div className="artists-album-card-main">
-                    {
-                        artistSongs&&
-                        artistSongs.map((song, idx) => {
-                            return(<ArtistsAlbumCard 
+                    {artistSongs &&
+                      artistSongs.map((song, idx) => {
+                        return (
+                          <ArtistsAlbumCard
                             songTitle={song.title}
                             songCover={song.album.cover_big}
                             songArtist={song.artist.name}
-                            />)
-                        })
-                    }
+                            playSong={() =>
+                              playAlbumSong(song.id, "artist", "artistsSongs")
+                            }
+                          />
+                        );
+                      })}
                   </div>
                   <div className="see-more-artist-info">
                     <p>See More by {actualArtist?.name}</p>
@@ -241,13 +269,11 @@ function Artists() {
                 </div>
               </div>
             </div>
+            <MusicPlayer />
           </div>
           <div className="main-page-col-2">
             <div className="top-100-main">
               <Top100Weekly />
-            </div>
-            <div className="now-playing-main-container">
-              <NowPlaying />
             </div>
           </div>
         </div>

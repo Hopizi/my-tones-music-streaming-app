@@ -37,13 +37,14 @@
 }
 
 .pause-play-container {
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
     background-color: #4343ef;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .pause-play {

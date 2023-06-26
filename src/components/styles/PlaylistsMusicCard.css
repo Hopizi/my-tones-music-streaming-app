@@ -3,6 +3,11 @@
     background-color: #fff;
     border-radius: 16px;
     margin-bottom: 10px;
+    width: 94%;
+}
+
+#dark.playlists-music-card {
+    background-color: #060404;
 }
 
 .inner-playlist-music-card-main {
@@ -42,4 +47,17 @@
 
 .my-playlist-music-card-title-artist p:nth-child(2) {
     font-size: 13px;
+}
+
+.my-music-card-cover {
+    width: 67px;
+    height: 67px;
+    border-radius: 10px;
+    margin-right: 25px;
+}
+.my-music-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import "./styles/ArtistsAlbumCard.css"
 
-function ArtistsAlbumCard({songCover, songArtist, songTitle}) {
+function ArtistsAlbumCard({songCover, songArtist, songTitle, playSong}) {
 
   function shortenTitle(str) {
     let length = 19;
@@ -15,7 +15,7 @@ function ArtistsAlbumCard({songCover, songArtist, songTitle}) {
   }
 
   return (
-    <div className='artist-album-card-main'>
+    <div className='artist-album-card-main' onClick={playSong}>
         <div className='artist-album-card-cover'>
             <img src={songCover}/>
         </div>

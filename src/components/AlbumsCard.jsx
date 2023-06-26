@@ -1,7 +1,7 @@
 import React from 'react'
 import "./styles/AlbumsCard.css"
 
-function AlbumsCard({albumArtist, albumCover, albumTitle}) {
+function AlbumsCard({albumArtist, albumCover, albumTitle, onClick}) {
 
   function shortenTitle(str) {
     let length = 17;
@@ -16,7 +16,7 @@ function AlbumsCard({albumArtist, albumCover, albumTitle}) {
 
 
   return (
-    <div className='albums-card-main'>
+    <div className='albums-card-main' onClick={onClick}>
         <div className='albums-card-main-cover'>
           <img src={albumCover}/>
         </div>

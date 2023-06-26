@@ -29,4 +29,5 @@
 .artist-album-card-main {
     margin: 15px 0;
     width: 140px;
+    cursor: pointer;
 }

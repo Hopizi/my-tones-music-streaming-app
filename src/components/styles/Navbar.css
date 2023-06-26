@@ -9,6 +9,26 @@
 .nav-items-container ul li {
     list-style: none;
     margin: 0 15px 0 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-items-container ul li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #4343EF;
+    border-radius: 3px;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+    transform: scaleX(0);
+}
+
+.nav-items-container ul li:hover::after {
+    transform: scaleX(1);
 }
 
 .search-main {
@@ -32,6 +52,10 @@
     background-color: #F0F0F5;
     padding: 5px 10px;
     font-family: inherit;
+}
+
+#dark.inner-search-main input {
+    background-color: #242424;
 }
 
 .search-icon {

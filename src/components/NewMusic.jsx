@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import "./styles/NewMusic.css"
 import NewMusicCard from './NewMusicCard'
 import {newMusic} from "../api/Music"
 import { db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { CurrentSongContext } from "../context/CurrentSong";
 
 function NewMusic() {
 
-  const [music, setMusic] = useState()
+  const [music, setMusic] = useState([])
 
-  // useEffect(() => {
-  //   setMusic(newMusic);
-  // }, [])
-
+  const { getClickedSong } = useContext(CurrentSongContext);
+  const { playingSong } = useContext(CurrentSongContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +21,8 @@ function NewMusic() {
 
         if (docSnapShot.exists()) {
           const docData = docSnapShot.data();
-          setMusic(docData.data);
+          const dataArray = Object.values(docData);
+          setMusic(dataArray);
         } else {
           console.log("document does not exixts");
         }
@@ -34,6 +34,9 @@ function NewMusic() {
     fetchData();
   }, []);
 
+  const playingSongsStyles = {
+    color: "#4343ef",
+  };
 
   return (
     <div className='new-music-main-container'>
@@ -44,12 +47,20 @@ function NewMusic() {
         <div className='new-musics-container'>
             {
               music && 
-              music.map((song, indx) => {
-                return <NewMusicCard 
-                musicArtist={song.artist.name}
-                musicTitle={song.title}
-                musicCover={song.album.cover_big}
-                />
+              music.map((song, idx) => {
+                return (
+                  <NewMusicCard
+                    musicArtist={song.artist.name}
+                    musicTitle={song.title}
+                    musicCover={song.album.cover_big}
+                    playSong={() =>
+                      getClickedSong(song.id, "music", "newMusic")
+                    }
+                    songCurrentStyle={
+                      playingSong?.id === song.id ? playingSongsStyles : {}
+                    }
+                  />
+                );
               })
             }
         </div>

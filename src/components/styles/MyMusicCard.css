@@ -4,6 +4,11 @@
     border-radius: 16px;
     margin-bottom: 10px;
     cursor: pointer;
+    width: 94%;
+}
+
+#dark.my-music-card-main {
+    background-color: #060404;
 }
 
 .inner-my-music-card-main {
@@ -35,6 +40,10 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.text-color {
+    color: #fff;
 }
 
 .my-music-card-title-artist p {

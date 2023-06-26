@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import "./styles/Top100Weekly.css"
 import SongCard from './SongCard'
 import {tracks} from "../api/Chart"
 import { db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { CurrentSongContext } from '../context/CurrentSong';
+import { ThemeContext } from '../context/DarkMode';
 
 function Top100Weekly() {
+
+  const { playTopSong } = useContext(CurrentSongContext);
+  const { playingSong } = useContext(CurrentSongContext);
+
+  const { theme } = useContext(ThemeContext);
 
   const [topTen, setTopTen] = useState()
 
@@ -17,6 +24,7 @@ function Top100Weekly() {
 
         if (docSnapShot.exists()) {
           const docData = docSnapShot.data();
+          console.log(docData)
          setTopTen(docData.data);
         } else {
           console.log("document does not exixts");
@@ -29,8 +37,12 @@ function Top100Weekly() {
     fetchData();
   }, []);
 
+  const playingSongsStyles = {
+    color: "#4343ef",
+  };
+
   return (
-    <div className='top-100-main-container'>
+    <div className='top-100-main-container' id={theme}>
         <div className='top-header-sect'>
             <h1>TOP 100 WEEKLY</h1>
             <p>More list</p>
@@ -38,12 +50,19 @@ function Top100Weekly() {
         <div className='songs-card-container'>
             { topTen && 
               topTen.map((song, idx) => {
-                return <SongCard 
-                songCover={song.cover_big}
-                songArtist={song.artist.name}
-                songTitle={song.title}
-                songPosition={song.position}
-                />
+                return (
+                  <SongCard
+                    songCover={song.cover_big}
+                    songArtist={song.artist.name}
+                    songTitle={song.title}
+                    songPosition={song.position}
+                    playSong={() => playTopSong(song.id)}
+                    songCurrentStyle={
+                      playingSong?.id === song.id ? playingSongsStyles : {}
+                    }
+                    duration={song.duration}
+                  />
+                );
               })
             }
         </div>

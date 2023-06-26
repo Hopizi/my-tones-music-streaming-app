@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './styles/Download.css'
 import {PlayIcon, Shuffle} from "../assets/main-display-icons"
 import { PlaylistsMusicCard , Sidebar, Navbar, Top100Weekly, NowPlaying } from '../components'
+import { ThemeContext } from "../context/DarkMode";
 
 function Download() {
+
+    const {theme} = useContext(ThemeContext)
+
   return (
-    <div className='home-page-main-container'>
+    <div className='home-page-main-container' id={theme}>
             <div className="sidebar-container">
-                <Sidebar />
+                <Sidebar currentLink='Downloads'/>
             </div>
             <div className='col-2-main'>
                 <div className="user-navbar">
@@ -42,9 +46,9 @@ function Download() {
                         <div className="top-100-main">
                             <Top100Weekly />
                         </div>
-                        <div className="now-playing-main-container">
+                        {/* <div className="now-playing-main-container">
                             <NowPlaying />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

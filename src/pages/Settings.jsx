@@ -15,10 +15,14 @@ import { auth, db, storage } from "../config/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Sidebar, Navbar, Top100Weekly, NowPlaying } from "../components";
 import { AuthContext } from "../context/AuthenticationContext";
+import { ThemeContext } from "../context/DarkMode";
 
 function Settings() {
   const { userData } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
+
+  const {theme} = useContext(ThemeContext)
+  const {toggleTheme} = useContext(ThemeContext)
 
   const [image, setImage] = useState("");
   const [data, setData] = useState({
@@ -107,10 +111,11 @@ function Settings() {
     }
   }
 
+
   return (
-    <div className="home-page-main-container">
+    <div className="home-page-main-container" id={theme}>
       <div className="sidebar-container">
-        <Sidebar />
+        <Sidebar currentLink='Settings'/>
       </div>
       <div className="col-2-main">
         <div className="user-navbar">
@@ -123,7 +128,7 @@ function Settings() {
                 <h1>Settings</h1>
               </div>
               <div className="inner-settings">
-                <div className="personal-settings">
+                <div className="personal-settings" id={theme}>
                   <div className="user-profile-pic-settings">
                     <div className="user-profile-pic-settings-container">
                       <img
@@ -205,24 +210,18 @@ function Settings() {
                     </div>
                   </div>
                   <div className="drak-mode-settings">
-                    <p>DarkMode</p>
+                    <p>Light Mode</p>
                     <div class="check-box">
-                      <input type="checkbox" className="toggle-switch" />
+                      <input 
+                      type="checkbox" 
+                      className="toggle-switch" 
+                      onChange={toggleTheme}
+                      checked={theme === "dark"}
+                      />
                     </div>
                   </div>
-                  <div className="music-player-positon">
-                    <p>Music Player Position</p>
-                    <select
-                      name="playerPosition"
-                      onChange={handleChange}
-                      value={data.playerPosition}
-                    >
-                      <option>Right Side</option>
-                      <option>Bottom Of Page</option>
-                    </select>
-                  </div>
                 </div>
-                <div className="chnage-password-settings">
+                {/* <div className="chnage-password-settings">
                   <p>Change Password</p>
                   <div className="change-password-input">
                     <div>
@@ -241,7 +240,7 @@ function Settings() {
                   <div className="change-password-btn">
                     <Button text="Change Password" style="margin-left" />
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="submit-setting-btn">
                 <Button
@@ -255,9 +254,6 @@ function Settings() {
           <div className="main-page-col-2">
             <div className="top-100-main">
               <Top100Weekly />
-            </div>
-            <div className="now-playing-main-container">
-              <NowPlaying />
             </div>
           </div>
         </div>
