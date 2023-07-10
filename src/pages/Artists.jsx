@@ -23,7 +23,7 @@ function Artists() {
 
   const { getClickedSong } = useContext(CurrentSongContext);
   const { theme } = useContext(ThemeContext);
-  const {playAlbumSong} = useContext(CurrentSongContext)
+  const { playAlbumSong, playArtistsSong } = useContext(CurrentSongContext);
 
     const [artistsCard, setArtistCard] = useState()
     const [artistInfo, setArtistInfo] = useState()
@@ -31,10 +31,6 @@ function Artists() {
     const [artistSongs, setArtistSongs] = useState()
     const [actualArtist, setActualArtist] = useState()
     const [isArtistClicked, setIsArtistClicked] = useState(false);
-
-    // useEffect(() => {
-    //     setArtistCard(artists)
-    // }, [])
 
     const selectArtist = (id) => {
         setSelectedArtist(id);
@@ -205,8 +201,7 @@ function Artists() {
               </div>
               <div className="artists-display-container" id={theme}>
                 <div
-                  className="main-artists-display-contianer"
-                  // style={isArtistClicked ? { width: "50%" } : {}}
+                  className="main-artists-display-contianer"  
                 >
                   {artistsCard &&
                     artistsCard.map((artist, idx) => {
@@ -230,7 +225,6 @@ function Artists() {
                 </div>
                 <div
                   className="main-artists-info-display"
-                  // style={isArtistClicked ? { width: "50%", visibility: "visible" } : {}}
                 id={theme}>
                   <div className="overlay-albums" style={isArtistClicked ? {display: "none"} : {}} id={theme}></div>
                   <div className="main-artists-info-header" id={theme}>
@@ -257,7 +251,7 @@ function Artists() {
                             songCover={song.album.cover_big}
                             songArtist={song.artist.name}
                             playSong={() =>
-                              playAlbumSong(song.id, "artist", "artistsSongs")
+                              playArtistsSong(song.id, "artist", "artistsSongs")
                             }
                           />
                         );

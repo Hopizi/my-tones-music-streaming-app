@@ -21,16 +21,14 @@ function Settings() {
   const { userData } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
 
-  const {theme} = useContext(ThemeContext)
-  const {toggleTheme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
+  const { toggleTheme } = useContext(ThemeContext);
 
   const [image, setImage] = useState("");
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
     language: "",
-    playerPosition: "",
-    userName: "",
   });
   const [percetage, setPercentage] = useState(null);
 
@@ -79,8 +77,6 @@ function Settings() {
       firstName: userData && userData.firstName ? userData.firstName : "",
       lastName: userData && userData.lastName ? userData.lastName : "",
       language: userData && userData.language ? userData.language : "",
-      playerPosition:
-        userData && userData.playerPosition ? userData.playerPosition : "",
       userName: userData && userData.userName ? userData.userName : "",
     });
   }, [userData]);
@@ -111,11 +107,10 @@ function Settings() {
     }
   }
 
-
   return (
     <div className="home-page-main-container" id={theme}>
       <div className="sidebar-container">
-        <Sidebar currentLink='Settings'/>
+        <Sidebar currentLink="Settings" />
       </div>
       <div className="col-2-main">
         <div className="user-navbar">
@@ -176,7 +171,7 @@ function Settings() {
                         type="text"
                         name="userName"
                         onChange={handleChange}
-                        value={data.userName}
+                        value={userData && userData.userName}
                       />
                     </div>
                     <div>
@@ -212,11 +207,11 @@ function Settings() {
                   <div className="drak-mode-settings">
                     <p>Light Mode</p>
                     <div class="check-box">
-                      <input 
-                      type="checkbox" 
-                      className="toggle-switch" 
-                      onChange={toggleTheme}
-                      checked={theme === "dark"}
+                      <input
+                        type="checkbox"
+                        className="toggle-switch"
+                        onChange={toggleTheme}
+                        checked={theme === "dark"}
                       />
                     </div>
                   </div>

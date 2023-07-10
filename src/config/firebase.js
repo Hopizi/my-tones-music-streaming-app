@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import {getStorage} from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDk2CN1uW2soreKWaJTQ_uTvQgbrU_Rk5s",
-  authDomain: "my-tones-streaming-app.firebaseapp.com",
-  projectId: "my-tones-streaming-app",
-  storageBucket: "my-tones-streaming-app.appspot.com",
-  messagingSenderId: "348998066105",
-  appId: "1:348998066105:web:393d94d0f473682e05a068",
-  measurementId: "G-ZCQWPYN4MR"
+  apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
  

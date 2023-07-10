@@ -32,10 +32,7 @@ function Navbar({navUserData}) {
         </ul>
       </div>
       <div className="search-main">
-        <div className="inner-search-main" >
-          <input placeholder="Search..." />
-          <SearchIcon className="search-icon" />
-        </div>  
+          
       </div>
       <div className="other-none-items">
         {!currentUser ? (
@@ -51,7 +48,7 @@ function Navbar({navUserData}) {
               <Notification className="utility-icons" />
             </div>
             <div className="user-info-section">
-              <div className="user-profile-pic">
+              <div className="user-profile-pic" style={!currentUser ? {visibility: "hidden"} : {}}>
                 <img src={userData?.img} />
               </div>
               <div className="user-name">

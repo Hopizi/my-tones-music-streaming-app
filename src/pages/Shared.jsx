@@ -8,6 +8,8 @@ import {
   Top100Weekly,
   NowPlaying,
 } from "../components";
+import { Like } from "../assets/navbar-icons";
+import { HeartLike } from "../assets/main-display-icons";
 import { ThemeContext } from "../context/DarkMode";
 
 function Shared() {
@@ -41,9 +43,10 @@ function Shared() {
               </div>
               <div className="shared-songs">
                 <PlaylistsMusicCard
-                  musicTitle={"Anyone"}
+                  musicTitle="Anyone"
                   artist="Justin Bieber"
-                  duration="3:21"
+                  duration= '167'
+                  Isliked= {HeartLike}
                 />
               </div>
             </div>
@@ -52,9 +55,6 @@ function Shared() {
             <div className="top-100-main">
               <Top100Weekly />
             </div>
-            {/* <div className="now-playing-main-container">
-              <NowPlaying />
-            </div> */}
           </div>
         </div>
       </div>

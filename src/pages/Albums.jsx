@@ -23,11 +23,13 @@ function Albums() {
 
     const { playAlbumSong } = useContext(CurrentSongContext);
     const { playingSong } = useContext(CurrentSongContext);
+    const { playPlaylist } = useContext(CurrentSongContext);
     const { theme } = useContext(ThemeContext);
 
     const [allAlbums, setAllAlbums] = useState();
     const [clicked, setClicked] = useState(false)
     const [albumClicked, setAlbumClicked] = useState()
+    const [playlists, setPlaylist] = useState()
 
     useEffect(() => {
       const fetchData = async () => {
@@ -49,6 +51,20 @@ function Albums() {
 
       fetchData();
     }, []);
+
+    useEffect(() => {
+      let songsInfo = [];
+      albumClicked?.forEach((song) => {
+        songsInfo.push({
+          preview: song.preview,
+          cover_big: song.album.cover_big,
+          title: song.title,
+          artist: song.artist.name,
+          id: song.id,
+        });
+      })
+      setPlaylist(songsInfo)
+    },[albumClicked])
 
     const playingSongsStyles = {
       color: "#4343ef",
@@ -78,16 +94,26 @@ function Albums() {
                   )}
                   <h1>Albums</h1>
                 </div>
-                <div className="albums-header-col-2">
-                  <span>
-                    <Play className="play-albums" />
-                    Play
-                  </span>
-                  <span>
-                    <Shuffle className="shuffle-albums" />
-                    Shuffle
-                  </span>
-                </div>
+                {clicked && (
+                  <div className="albums-header-col-2">
+                    <span
+                      onClick={() => {
+                        playPlaylist(playlists, false);
+                      }}
+                    >
+                      <Play className="play-albums" />
+                      Play
+                    </span>
+                    <span
+                      onClick={() => {
+                        playPlaylist(playlists, true);
+                      }}
+                    >
+                      <Shuffle className="shuffle-albums" />
+                      Shuffle
+                    </span>
+                  </div>
+                )}
               </div>
               {clicked ? (
                 <div className="clicked-album-info">
@@ -112,23 +138,26 @@ function Albums() {
                     </div>
                   </div>
                   <div className="album-songs-section-1">
-                  {albumClicked.map((albumSong, idx) => {
-                    return (
-                      <AlbumMusicCard
-                        songTitle={albumSong.title}
-                        songArtist={albumSong.artist.name}
-                        duration={albumSong.duration}
-                        number={idx + 1}
-                        playSong={() =>
-                          playAlbumSong(albumSong.id, albumClicked)
-                        }
-                        songCurrentStyle={
-                          playingSong?.id === albumSong.id ? playingSongsStyles : {}
-                        }
-                      />
-                    );
-                  })}
-                </div>
+                    {albumClicked.map((albumSong, idx) => {
+                      return (
+                        <AlbumMusicCard
+                          key={idx}
+                          songTitle={albumSong.title}
+                          songArtist={albumSong.artist.name}
+                          duration={albumSong.duration}
+                          number={idx + 1}
+                          playSong={() =>
+                            playAlbumSong(albumSong.id, "albums", "albums")
+                          }
+                          songCurrentStyle={
+                            playingSong?.id === albumSong.id
+                              ? playingSongsStyles
+                              : {}
+                          }
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
               ) : (
                 <div className="albums-main-container-cards" id={theme}>
@@ -137,6 +166,7 @@ function Albums() {
                       allAlbums.map((album, idx) => {
                         return (
                           <AlbumsCard
+                            key={idx}
                             albumArtist={album.data[0].artist.name}
                             albumTitle={album.data[0].album.title}
                             albumCover={album.data[0].album.cover_big}

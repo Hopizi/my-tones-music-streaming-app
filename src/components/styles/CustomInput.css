@@ -1,0 +1,51 @@
+input.input-error, select.input-error {
+    border: 1px solid red;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.year-align {
+    margin-left: auto;
+    width: 90px;
+}
+
+.year-align .inner-main-date-input input {
+    width: 100%;
+}
+
+.main-date-input {
+    display: flex; 
+    flex-direction: column;
+    width: 33%;
+}
+
+.inner-main-date-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-main-date-input input{
+    height: 40px;
+    width: 50%;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid grey;
+    font-family: inherit;
+    font-size: 19px;
+}
+
+.select-inner-container select{
+    width: 100%;
+    height: 40px;
+    font-family: inherit;
+    font-size: 16px;
+    margin-top: 4px;
+}
+
+.select-inner-container:focus {
+    outline: none;
+}

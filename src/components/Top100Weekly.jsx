@@ -52,6 +52,7 @@ function Top100Weekly() {
               topTen.map((song, idx) => {
                 return (
                   <SongCard
+                    key={idx}
                     songCover={song.cover_big}
                     songArtist={song.artist.name}
                     songTitle={song.title}

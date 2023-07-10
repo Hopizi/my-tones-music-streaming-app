@@ -1,75 +1,89 @@
-import React from 'react'
-import { createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { auth, googleProvider } from '../config/firebase'
-import {createUserWithEmailAndPassword, signInWithPopup, signOut, signInWithEmailAndPassword} from "firebase/auth"
-import { db } from '../config/firebase'
-import { doc, getDoc } from 'firebase/firestore';
+import React from "react";
+import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth, googleProvider } from "../config/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export const AuthContext = createContext(null);
 
-export const AuthContextProvider = ({children}) => {
-
+export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
-  const [error, setError] = useState(false)
-  const [userData ,setUserData] = useState()
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+  const [error, setError] = useState(false);
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser))
-  }, [currentUser])
-  
-
+    localStorage.setItem("user", JSON.stringify(currentUser));
+  }, [currentUser]);
 
   async function signIn(email, password) {
-        try {
-            const userCredentials = await signInWithEmailAndPassword(auth, email, password)
-            setCurrentUser(userCredentials.user);
-            console.log(currentUser)
-            navigate('/')
-        }catch(err) {
-            console.log(err)
-            setError(true)
-        }
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setCurrentUser(userCredentials.user);
+      console.log(currentUser);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError(true);
     }
+  }
 
   async function signInWithGoogle() {
-        try {
-            await signInWithPopup(auth, googleProvider)
-        } catch(err) {
-            console.log(err)
-        }
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (err) {
+      console.log(err);
     }
+  }
 
   async function logOut() {
-        try {
-            await signOut(auth)
-            console.log("Logged Out !")
-        } catch(err) {
-            console.log(err)
-        }
-        navigate("/login")
+    try {
+      await signOut(auth);
+      console.log("Logged Out !");
+      navigate("/login");
+      localStorage.removeItem('user')
+    } catch (err) {
+      console.log(err);
     }
+  }
 
   useEffect(() => {
-        const fetchData = async () => {
-            const userId = currentUser.uid;
+    const fetchData = async () => {
+      const user = currentUser;
 
-            let userData = []
-            
-            const docRef = doc(db, "users", userId);
-            const docSnap = await getDoc(docRef);
+      if (user) {
+        const userId = currentUser.uid;
+        let userData = [];
 
-            if (docSnap.exists()) {
-                userData = docSnap.data()
-                setUserData(userData)
-            } else {
-            console.log("No such document!");
-            }
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          userData = docSnap.data();
+          setUserData(userData);
+        } else {
+          console.log("No such document!");
         }
-        fetchData();
-    }, [])
+      }else {
+        console.log("User is Not Logged in")
+      }
+    };
+    fetchData();
+  }, []);
 
   const authContextValue = {
     currentUser,
@@ -77,10 +91,12 @@ export const AuthContextProvider = ({children}) => {
     signIn,
     signInWithGoogle,
     logOut,
-    userData
-  }
+    userData,
+  };
 
   return (
-    <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>
-  )
-}
+    <AuthContext.Provider value={authContextValue}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

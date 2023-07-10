@@ -1,5 +1,5 @@
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 export {
-    ProtectedRoute
+    ProtectedRoutes
 }

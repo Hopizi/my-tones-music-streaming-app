@@ -5,7 +5,11 @@ import { CurrentSongContext } from '../context/CurrentSong';
 function FeaturedAlbumInfo({albumClicked}) {
 
     const { playFeaturedAlbumSong } = useContext(CurrentSongContext);
-    const { playingSong } = useContext(CurrentSongContext);
+    const { playingSong } = useContext(CurrentSongContext);4
+
+    const playingSongsStyles = {
+      color: "#4343ef",
+    };
 
   return (
     <div className="clicked-album-info">
@@ -33,11 +37,14 @@ function FeaturedAlbumInfo({albumClicked}) {
         {albumClicked.tracks.data.map((albumSong, idx) => {
           return (
             <AlbumMusicCard
+              key={idx}
               songTitle={albumSong.title}
               songArtist={albumSong.artist.name}
               duration={albumSong.duration}
               number={idx + 1}
-              playSong={() => playFeaturedAlbumSong(albumSong.id, albumClicked)}
+              playSong={() =>
+                playFeaturedAlbumSong(albumSong.id, "albums", "featuredAlbums")
+              }
               songCurrentStyle={
                 playingSong?.id === albumSong.id ? playingSongsStyles : {}
               }

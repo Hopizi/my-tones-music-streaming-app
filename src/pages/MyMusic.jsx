@@ -5,20 +5,11 @@ import {
   Sidebar,
   Navbar,
   Top100Weekly,
-  NowPlaying,
   MusicPlayer,
 } from "../components";
 import { Play, Shuffle } from "../assets/now-playing-icons";
 import { db } from "../config/firebase";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  getDoc,
-  onSnapshot,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { AuthContext } from "../context/AuthenticationContext";
 import { CurrentSongContext } from "../context/CurrentSong";
 import { ThemeContext } from "../context/DarkMode";
@@ -30,14 +21,13 @@ function MyMusic() {
 
   const { currentUser } = useContext(AuthContext);
   const { getClickedSong } = useContext(CurrentSongContext);
+  const { playPlaylist } = useContext(CurrentSongContext);
   const { playingSong } = useContext(CurrentSongContext);
   const { theme } = useContext(ThemeContext);
-  const { favouritesSongs } = useContext(FavouriteSongsContext);
+  const { favouritesSongs, addFavourite } = useContext(FavouriteSongsContext);
 
   const [musicSec, setMusicSec] = useState();
-  const [favouriteSelected, setFavouriteSelected] = useState();
-  const [likeState, setLikeState] = useState(false);
-  const [likedSongsData, setLikedSongsData] = useState([]);
+  const [playlists, setPlaylists] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,52 +50,20 @@ function MyMusic() {
     fetchData();
   }, []);
 
-  async function addFavourite(songId) {
-    const userId = currentUser.uid;
-
-    try {
-      const docRef = doc(db, "usersPreferences", userId);
-
-      const docSnapShot = await getDoc(docRef);
-      let inLikedata;
-
-      if (docSnapShot.exists()) {
-        const docData = docSnapShot.data();
-        const likedSongs = docData.favoriteSongs;
-        inLikedata = likedSongs;
-        setLikedSongsData(likedSongs);
-        
-      } else {
-        console.log("document does not exixts");
-      }
-
-      const favoriteRef = doc(db, "usersPreferences", userId);
-      const isLiked = inLikedata.includes(songId);
-
-      if (userId) {
-        if (inLikedata) {
-          if (isLiked) {
-            await updateDoc(favoriteRef, {
-              favoriteSongs: arrayRemove(songId),
-            });
-          } else {
-            await updateDoc(favoriteRef, {
-              favoriteSongs: arrayUnion(songId),
-            });
-          }
-        } else {
-          await setDoc(favoriteRef, {
-            favoriteSongs: [songId],
-            userId: userId,
-          });
-        }
-      } else {
-        console.log("User Is Not Logged In");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  useEffect(() => {
+    let songsInfo = []
+    musicSec?.forEach(song => {
+      songsInfo.push({
+        preview: song.preview,
+        cover_big: song.album.cover_big,
+        title: song.title,
+        artist: song.artist.name,
+        id: song.id
+      })
+    })
+    console.log(songsInfo)
+    setPlaylists(songsInfo);
+  }, [musicSec])
 
   const playingSongsStyles = {
     color: "#4343ef",
@@ -126,11 +84,19 @@ function MyMusic() {
               <div className="my-music-header-section">
                 <h1>My Music</h1>
                 <div className="my-music-header-section-col-2">
-                  <span>
+                  <span
+                    onClick={() => {
+                      playPlaylist(playlists, false);
+                    }}
+                  >
                     <Play className="play-my-music" />
                     Play
                   </span>
-                  <span>
+                  <span
+                    onClick={() => {
+                      playPlaylist(playlists, true);
+                    }}
+                  >
                     <Shuffle className="shuffle-my-music" />
                     Shuffle
                   </span>
@@ -146,7 +112,9 @@ function MyMusic() {
                         songCover={song.album.cover_big}
                         key={idx}
                         onClick={() => addFavourite(song.id)}
-                        IsLiked={favouritesSongs.includes(song.id) ? HeartLike : Like}
+                        IsLiked={
+                          favouritesSongs.includes(song.id) ? HeartLike : Like
+                        }
                         playSong={() =>
                           getClickedSong(song.id, "music", "myMusic")
                         }
@@ -165,9 +133,6 @@ function MyMusic() {
             <div className="top-100-main">
               <Top100Weekly />
             </div>
-            {/* <div className="now-playing-main-container">
-              <NowPlaying />
-            </div> */}
           </div>
         </div>
       </div>

@@ -26,6 +26,10 @@ import PlaylistsMusicCard from "./PlaylistsMusicCard";
 import ContinueWith from "./ContinueWith";
 import MusicPlayer from "./MusicPlayer";
 import AlbumMusicCard from "./AlbumMusicCard";
+import CustomInput from "./CustomInput";
+import CustomSelect from "./CustomSelect";
+import CustomCheckBox from "./CustomCheckBox";
+import CustomAgeInput from "./CustomAgeInput";
 
 
 export {
@@ -56,5 +60,9 @@ export {
     PlaylistsMusicCard,
     ContinueWith,
     MusicPlayer,
-    AlbumMusicCard
+    AlbumMusicCard,
+    CustomInput,
+    CustomSelect,
+    CustomCheckBox,
+    CustomAgeInput
 }

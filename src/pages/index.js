@@ -10,6 +10,7 @@ import Download from "./Download";
 import Settings from "./Settings";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import ForgotPassword from "./ForgotPassword";
 
 export {
     HomePage,
@@ -23,5 +24,6 @@ export {
     Download,
     Settings,
     Login,
-    SignUp
+    SignUp,
+    ForgotPassword
 }

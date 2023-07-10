@@ -24,6 +24,15 @@ a {
   height: 10px;
 }
 
+input.input-error,
+select.input-error {
+  border-color: #fc8181;
+}
+
+button:disabled {
+  opacity: 0.35;
+}
+
 /* ::-webkit-scrollbar-track {
   background-color: #F0F0F5;
   border-radius: 5px;

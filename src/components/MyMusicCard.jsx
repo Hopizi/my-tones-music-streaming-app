@@ -3,10 +3,12 @@ import "./styles/MyMusicCard.css";
 import { Like } from "../assets/navbar-icons";
 import { Dots, HeartLike } from "../assets/main-display-icons";
 import { ThemeContext } from "../context/DarkMode";
+import { AuthContext } from "../context/AuthenticationContext";
 
 function MyMusicCard({ songArtist, songCover, songTitle, onClick, IsLiked, playSong, songCurrentStyle, duration }) {
 
   const { theme } = useContext(ThemeContext);
+  const { currentUser } = useContext(AuthContext)
 
   function fmtMSS(s) {
     return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
@@ -39,12 +41,14 @@ function MyMusicCard({ songArtist, songCover, songTitle, onClick, IsLiked, playS
         </div>
         <div className="my-music-card-time-like-others">
           <p>{fmtMSS(duration)}</p>
+          { currentUser &&
           <IsLiked
             onClick={(event) => {
               event.stopPropagation();
               onClick();
             }}
           />
+          }
           <Dots />
         </div>
       </div>

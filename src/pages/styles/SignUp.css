@@ -60,57 +60,9 @@
     margin-top: 20px;
 }
 
-.date-of-birth div {
+.custom-year {
     display: flex;
-    flex-direction: column;
-}
-
-.date-of-birth div label {
-    margin-bottom: 5px;
-}
-
-.date-of-birth div:first-child {
-    width: 30%;
-}
-
-.date-of-birth div:first-child input {
-    width: 50%; 
-    height: 40px;
-    border-radius: 5px;
-    outline: none;
-    border: 1px solid grey;
-    font-family: inherit;
-    font-size: 19px;
-}
-
-.date-of-birth div:nth-child(2) {
-    width: 35%;
-}
-
-.date-of-birth div:nth-child(2) select {
-    width: 100%;
-    height: 40px;
-    font-family: inherit;
-    font-size: 16px;
-}
-
-.date-of-birth div:nth-child(2) select:focus {
-    outline: none;
-}
-
-.date-of-birth div:nth-child(3) {
-    margin-left: auto;
-    width: 20%;
-}
-
-.date-of-birth div:nth-child(3) input {
-    width: 80%; 
-    height: 40px;
-    border-radius: 5px;
-    outline: none;
-    border: 1px solid grey;
-    font-family: inherit;
-    font-size: 19px;
+    border: 1px solid;
 }
 
 .gender-section {

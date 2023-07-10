@@ -7,13 +7,13 @@ import { AuthContext } from '../context/AuthenticationContext'
 import { FavouriteSongsContext } from '../context/FavouriteSongs'
 import {doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { Like } from "../assets/navbar-icons";
-import { HeartLike } from "../assets/main-display-icons";
+import { CurrentSongContext } from '../context/CurrentSong'
 function Favourites() {
 
   const { theme } = useContext(ThemeContext);
   const { currentUser } = useContext(AuthContext);
-  const {favouritesSongs} = useContext(FavouriteSongsContext)
+  const { favouritesSongs, addFavourite } = useContext(FavouriteSongsContext);
+  const { getClickedSong } = useContext(CurrentSongContext);
 
   const [favouriteSongsData, setFavouriteSongsData] = useState([])
   const [myMusicData, setMyMusicData] = useState([])
@@ -28,7 +28,6 @@ function Favourites() {
         const favSongs = docData.favoriteSongs;
         const favData = myMusicData.filter((song) => favSongs.includes(song.id));
         setFavouriteSongsData(favData);
-        console.log(favData)
       } else {
         console.log("Not Found");
       }
@@ -93,8 +92,8 @@ function Favourites() {
                         artist={song.artist.name}
                         duration={song.duration}
                         songCover={song.album.cover_big}
-                        Isliked={
-                          favouritesSongs.includes(song.id) ? HeartLike : Like
+                        playSong={() =>
+                          getClickedSong(song.id, "music", "myMusic")
                         }
                       />
                     );
@@ -108,9 +107,6 @@ function Favourites() {
             <div className="top-100-main">
               <Top100Weekly />
             </div>
-            {/* <div className="now-playing-main-container">
-              <NowPlaying />
-            </div> */}
           </div>
         </div>
       </div>

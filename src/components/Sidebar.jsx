@@ -13,6 +13,7 @@ import { ThemeContext } from "../context/DarkMode";
 
 function Sidebar({ setSelectedLink, currentLink}) {
   const { logOut } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
 
   const iconsStyle = {
@@ -26,6 +27,14 @@ function Sidebar({ setSelectedLink, currentLink}) {
       return {}
     }else {
       return { backgroundColor: "#f0f0f5" };
+    }
+  }
+
+  function logOutDisplay() {
+    if (currentUser) {
+      return {visibility: "visible"}
+    } else {
+      return {visibility: "none"}
     }
   }
 
@@ -116,7 +125,7 @@ function Sidebar({ setSelectedLink, currentLink}) {
                       ? logOut
                       : () => setSelectedLink(othersLink.title)
                   }
-                  style={othersLink.title === title ? getBackgroundColor() : {}}
+                  style={othersLink.title === title ? getBackgroundColor() : {} && othersLink.title === 'Logout' && !currentUser ? {visibility: "hidden"} : {visibility:"visible"} }
                   id={theme}
                 >
                   {<othersLink.icon style={iconsStyle} />}

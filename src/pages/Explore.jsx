@@ -12,6 +12,7 @@ import {
   FeaturedAlbumInfo
 } from "../components";
 import { ThemeContext } from "../context/DarkMode";
+import { Play, Shuffle } from "../assets/now-playing-icons";
 import {GoBack} from "../assets/main-display-icons";
 
 function Explore() {
@@ -20,10 +21,21 @@ function Explore() {
 
   const [clicked, setClicked] = useState(false);
   const [albumClicked, setAlbumClicked] = useState();
+  const [playlists, setPlaylist] = useState();
 
-  useEffect(() => {
-    console.log(albumClicked)
-  },[clicked])
+  // useEffect(() => {
+  //   let songsInfo = [];
+  //   albumClicked?.forEach((song) => {
+  //     songsInfo.push({
+  //       preview: song.preview,
+  //       cover_big: song.album.cover_big,
+  //       title: song.title,
+  //       artist: song.artist.name,
+  //       id: song.id,
+  //     });
+  //   });
+  //   setPlaylist(songsInfo);
+  // }, [albumClicked])
 
   return (
     <div className="home-page-main-container" id={theme}>
@@ -37,16 +49,38 @@ function Explore() {
         <div className="music-space-main">
           <div className="main-page-display">
             <div className="explore-main">
-              <div className="page-header-section">
-                {clicked ? (
-                  <GoBack
-                    className="go-back-icon"
-                    onClick={() => setClicked(false)}
-                  />
-                ) : (
-                  ""
+              <div className="albums-header-container">
+                <div className="page-header-section">
+                  {clicked ? (
+                    <GoBack
+                      className="go-back-icon"
+                      onClick={() => setClicked(false)}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  <h1>Explore</h1>
+                </div>
+                {clicked && (
+                  <div className="albums-header-col-2">
+                    <span
+                      onClick={() => {
+                        playPlaylist(playlists, false);
+                      }}
+                    >
+                      <Play className="play-albums" />
+                      Play
+                    </span>
+                    <span
+                      onClick={() => {
+                        playPlaylist(playlists, true);
+                      }}
+                    >
+                      <Shuffle className="shuffle-albums" />
+                      Shuffle
+                    </span>
+                  </div>
                 )}
-                <h1>Explore</h1>
               </div>
               {clicked ? (
                 <FeaturedAlbumInfo albumClicked={albumClicked} />
@@ -70,9 +104,6 @@ function Explore() {
             <div className="top-100-main">
               <Top100Weekly />
             </div>
-            {/* <div className="now-playing-main-container">
-              <NowPlaying />
-            </div> */}
           </div>
         </div>
       </div>

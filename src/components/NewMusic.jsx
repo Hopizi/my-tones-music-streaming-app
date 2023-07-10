@@ -39,33 +39,31 @@ function NewMusic() {
   };
 
   return (
-    <div className='new-music-main-container'>
-        <div className="new-music-header">
-            <h2 className='explore-header-title'>New Music</h2>
-            <p className='explore-header-title-2'>See All</p>
+    <div className="new-music-main-container">
+      <div className="new-music-header">
+        <h2 className="explore-header-title">New Music</h2>
+        <p className="explore-header-title-2">See All</p>
+      </div>
+      <div className="new-music-inner-container">
+        <div className="new-musics-container">
+          {music &&
+            music.map((song, idx) => {
+              return (
+                <NewMusicCard
+                  musicArtist={song.artist.name}
+                  musicTitle={song.title}
+                  musicCover={song.album.cover_big}
+                  playSong={() => getClickedSong(song.id, "music", "newMusic")}
+                  songCurrentStyle={
+                    playingSong?.id === song.id ? playingSongsStyles : {}
+                  }
+                />
+              );
+            })}
         </div>
-        <div className='new-musics-container'>
-            {
-              music && 
-              music.map((song, idx) => {
-                return (
-                  <NewMusicCard
-                    musicArtist={song.artist.name}
-                    musicTitle={song.title}
-                    musicCover={song.album.cover_big}
-                    playSong={() =>
-                      getClickedSong(song.id, "music", "newMusic")
-                    }
-                    songCurrentStyle={
-                      playingSong?.id === song.id ? playingSongsStyles : {}
-                    }
-                  />
-                );
-              })
-            }
-        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default NewMusic
