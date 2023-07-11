@@ -23,7 +23,8 @@ function Artists() {
 
   const { getClickedSong } = useContext(CurrentSongContext);
   const { theme } = useContext(ThemeContext);
-  const { playAlbumSong, playArtistsSong } = useContext(CurrentSongContext);
+  const { playAlbumSong, playArtistsSong, playPlaylist } =
+    useContext(CurrentSongContext);
 
     const [artistsCard, setArtistCard] = useState()
     const [artistInfo, setArtistInfo] = useState()
@@ -31,6 +32,7 @@ function Artists() {
     const [artistSongs, setArtistSongs] = useState()
     const [actualArtist, setActualArtist] = useState()
     const [isArtistClicked, setIsArtistClicked] = useState(false);
+    const [playlists, setPlaylist] = useState();
 
     const selectArtist = (id) => {
         setSelectedArtist(id);
@@ -72,7 +74,6 @@ function Artists() {
             const { object, artist } = info;
             setArtistSongs(object)
             setActualArtist(artist)
-            console.log(artist)
         }
     }, [selectedArtist])
 
@@ -180,9 +181,20 @@ function Artists() {
         }
     }
 
-    const currentArtist = {
-      backgroundColor: "#f0f0f5",
-    };
+    useEffect(() => {
+      let songsInfo = [];
+
+      artistSongs?.forEach((song) => {
+        songsInfo.push({
+          preview: song.preview,
+          cover_big: song.album.cover_big,
+          title: song.title,
+          artist: song.artist.name,
+          id: song.id,
+        });
+      })
+      setPlaylist(songsInfo);
+    }, [artistSongs])
 
   return (
     <div className="home-page-main-container" id={theme}>
@@ -200,13 +212,12 @@ function Artists() {
                 <h1>Artists</h1>
               </div>
               <div className="artists-display-container" id={theme}>
-                <div
-                  className="main-artists-display-contianer"  
-                >
+                <div className="main-artists-display-contianer">
                   {artistsCard &&
                     artistsCard.map((artist, idx) => {
                       return (
                         <ArtistsCard
+                          key={idx}
                           artistCover={artist.picture_big}
                           artistName={artist.name}
                           id={artist.id}
@@ -215,7 +226,7 @@ function Artists() {
                             setIsArtistClicked(true);
                           }}
                           currentArtist={
-                            actualArtist?.id === artist.id && theme === 'light'
+                            actualArtist?.id === artist.id && theme === "light"
                               ? { backgroundColor: "#f0f0f5" }
                               : {}
                           }
@@ -223,20 +234,30 @@ function Artists() {
                       );
                     })}
                 </div>
-                <div
-                  className="main-artists-info-display"
-                id={theme}>
-                  <div className="overlay-albums" style={isArtistClicked ? {display: "none"} : {}} id={theme}></div>
+                <div className="main-artists-info-display" id={theme}>
+                  <div
+                    className="overlay-albums"
+                    style={isArtistClicked ? { display: "none" } : {}}
+                    id={theme}
+                  ></div>
                   <div className="main-artists-info-header" id={theme}>
                     <div className="main-artists-info-header-text">
                       <p>{actualArtist?.name}</p>
                     </div>
                     <div className="main-artists-info-play-shuffle">
-                      <span>
+                      <span
+                        onClick={() => {
+                          playPlaylist(playlists, false);
+                        }}
+                      >
                         <Play className="play-main-artists" />
                         Play
                       </span>
-                      <span>
+                      <span
+                        onClick={() => {
+                          playPlaylist(playlists, true);
+                        }}
+                      >
                         <Shuffle className="shuffle-main-artists" />
                         Shuffle
                       </span>
@@ -247,6 +268,7 @@ function Artists() {
                       artistSongs.map((song, idx) => {
                         return (
                           <ArtistsAlbumCard
+                            key={idx}
                             songTitle={song.title}
                             songCover={song.album.cover_big}
                             songArtist={song.artist.name}

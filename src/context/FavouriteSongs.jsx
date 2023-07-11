@@ -12,97 +12,107 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-export  const FavouriteSongsContext = createContext(null)
+export const FavouriteSongsContext = createContext(null);
 
-export const FavouriteSongsContextProvider = ({children}) => {
+export const FavouriteSongsContextProvider = ({ children }) => {
+  const { currentUser } = useContext(AuthContext);
 
-    const { currentUser } = useContext(AuthContext);
+  const [favouritesSongs, setFavourtitesSongs] = useState([]);
 
-    const [favouritesSongs, setFavourtitesSongs] = useState([]);
-
-    useEffect(() => {
-
-      if (currentUser) {
-        const userId = currentUser.uid;
-
-        const docRef = doc(db, "usersPreferences", userId);
-        const unSubscribe = onSnapshot(docRef, (docSnapShot) => {
-          if (docSnapShot.exists()) {
-            const docData = docSnapShot.data();
-            const favSongs = docData.favoriteSongs;
-            setFavourtitesSongs(favSongs);
-          } else {
-            console.log("Not Found");
-          }
-        });
-        return () => {
-          unSubscribe();
-        };
-      } else {
-        console.log('Please Login')
-      }
-    }, []);
-
-    async function addFavourite(songId) {
+  useEffect(() => {
+    if (currentUser) {
       const userId = currentUser.uid;
-      if (userId) {
-        try {
-          const docRef = doc(db, "usersPreferences", userId);
 
-          let docSnapShot = await getDoc(docRef);
-          let inLikedata;
-
-          if (docSnapShot.exists()) {
-            const docData = docSnapShot.data();
-            const likedSongs = docData.favoriteSongs;
-            inLikedata = likedSongs;
-          } else {
-            await setDoc(docRef, {
-              favoriteSongs: [songId],
-              userId: userId,
-            });
-            docSnapShot = await getDoc(docRef);
-            const docData = docSnapShot.data();
-            const likedSongs = docData.favoriteSongs;
-            inLikedata = likedSongs;
-          }
-
-          const favoriteRef = doc(db, "usersPreferences", userId);
-          const isLiked = inLikedata.includes(songId);
-
-          if (inLikedata) {
-            if (isLiked) {
-              await updateDoc(favoriteRef, {
-                favoriteSongs: arrayRemove(songId),
-              });
-            } else {
-              await updateDoc(favoriteRef, {
-                favoriteSongs: arrayUnion(songId),
-              });
-            }
-          } else {
-            await setDoc(favoriteRef, {
-              favoriteSongs: [songId],
-              userId: userId,
-            });
-          }
-        } catch (error) {
-          console.log(error);
+      const docRef = doc(db, "usersPreferences", userId);
+      const unSubscribe = onSnapshot(docRef, (docSnapShot) => {
+        if (docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+          const favSongs = docData.favoriteSongs;
+          console.log(favSongs)
+          setFavourtitesSongs(favSongs);
+        } else {
+          console.log("Not Found");
         }
-      } else {
-        console.log("User Is Not Logged In");
+      });
+      return () => {
+        unSubscribe();
+      };
+    } else {
+      console.log("Please Login");
+    }
+  }, []);
+
+  async function addFavouriteSong(songId, artist, title, cover, preview, duration) {
+    const userId = currentUser.uid;
+    if (userId) {
+      try {
+        const docRef = doc(db, "usersPreferences", userId);
+
+        console.log(title);
+        let docSnapShot = await getDoc(docRef);
+        let inLikedata;
+
+        if (docSnapShot.exists()) {
+          const docData = docSnapShot.data();
+          const likedSongs = docData.favoriteSongs;
+          inLikedata = likedSongs;
+        } else {
+          await setDoc(docRef, {
+            favoriteSongs: [
+              {
+                songId: songId,
+                artist: artist,
+                title: title,
+                cover: cover,
+                preview: preview,
+                duration: duration,
+              },
+            ],
+          });
+          docSnapShot = await getDoc(docRef);
+          const docData = docSnapShot.data();
+          const likedSongs = docData.favoriteSongs;
+          console.log(likedSongs);
+          inLikedata = likedSongs;
+        }
+
+        const favoriteRef = doc(db, "usersPreferences", userId);
+        const isLiked = inLikedata.some((data) => songId === data.songId);
+
+        if (isLiked) {
+          await updateDoc(favoriteRef, {
+            favoriteSongs: arrayRemove(
+              inLikedata.find((data) => data.songId === songId)
+            ),
+          });
+        } else {
+          await updateDoc(favoriteRef, {
+            favoriteSongs: arrayUnion({
+              songId: songId,
+              artist: artist,
+              title: title,
+              cover: cover,
+              preview: preview,
+              duration: duration,
+            }),
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
+    } else {
+      console.log("User Is Not Logged In");
     }
+  }
 
+  const favSongs = {
+    favouritesSongs,
+    addFavouriteSong,
+  };
 
-    const favSongs = {
-        favouritesSongs,
-        addFavourite
-    }
-
-    return (
-        <FavouriteSongsContext.Provider value={favSongs}>
-            {children}
-        </FavouriteSongsContext.Provider>
-    )
-}
+  return (
+    <FavouriteSongsContext.Provider value={favSongs}>
+      {children}
+    </FavouriteSongsContext.Provider>
+  );
+};

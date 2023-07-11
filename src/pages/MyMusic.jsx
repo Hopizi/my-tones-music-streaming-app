@@ -24,7 +24,9 @@ function MyMusic() {
   const { playPlaylist } = useContext(CurrentSongContext);
   const { playingSong } = useContext(CurrentSongContext);
   const { theme } = useContext(ThemeContext);
-  const { favouritesSongs, addFavourite } = useContext(FavouriteSongsContext);
+  const { favouritesSongs, addFavourite, addFavouriteSong } = useContext(
+    FavouriteSongsContext
+  );
 
   const [musicSec, setMusicSec] = useState();
   const [playlists, setPlaylists] = useState();
@@ -111,9 +113,22 @@ function MyMusic() {
                         songTitle={song.title}
                         songCover={song.album.cover_big}
                         key={idx}
-                        onClick={() => addFavourite(song.id)}
+                        onClick={() =>
+                          addFavouriteSong(
+                            song.id,
+                            song.artist.name,
+                            song.title,
+                            song.album.cover_big,
+                            song.preview,
+                            song.duration
+                          )
+                        }
                         IsLiked={
-                          favouritesSongs.includes(song.id) ? HeartLike : Like
+                          favouritesSongs.some(
+                            (data) => song.id === data.songId
+                          )
+                            ? HeartLike
+                            : Like
                         }
                         playSong={() =>
                           getClickedSong(song.id, "music", "myMusic")

@@ -18,6 +18,9 @@ import { MusicPic } from "../assets/top100-icons";
 import { AuthContext } from "../context/AuthenticationContext";
 import { CurrentSongContext } from "../context/CurrentSong";
 import { ThemeContext } from "../context/DarkMode";
+import { FavouriteSongsContext } from "../context/FavouriteSongs";
+import { Like } from "../assets/navbar-icons";
+import { HeartLike } from "../assets/main-display-icons";
 
 function Albums() {
 
@@ -25,6 +28,9 @@ function Albums() {
     const { playingSong } = useContext(CurrentSongContext);
     const { playPlaylist } = useContext(CurrentSongContext);
     const { theme } = useContext(ThemeContext);
+    const { addFavouriteSong, favouritesSongs } = useContext(
+      FavouriteSongsContext
+    );
 
     const [allAlbums, setAllAlbums] = useState();
     const [clicked, setClicked] = useState(false)
@@ -149,11 +155,23 @@ function Albums() {
                           playSong={() =>
                             playAlbumSong(albumSong.id, "albums", "albums")
                           }
+                          IsLiked={favouritesSongs.some((data) => albumSong.id === data.songId )? HeartLike : Like
+                          }
                           songCurrentStyle={
                             playingSong?.id === albumSong.id
                               ? playingSongsStyles
                               : {}
                           }
+                          likeSong={() => {
+                            addFavouriteSong(
+                              albumSong.id,
+                              albumSong.artist.name,
+                              albumSong.title,
+                              albumSong.album.cover_big,
+                              albumSong.preview,
+                              albumSong.duration
+                            );
+                          }}
                         />
                       );
                     })}
@@ -187,9 +205,6 @@ function Albums() {
             <div className="top-100-main">
               <Top100Weekly />
             </div>
-            {/* <div className="now-playing-main-container">
-              <NowPlaying />
-            </div> */}
           </div>
         </div>
       </div>

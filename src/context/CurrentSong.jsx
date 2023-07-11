@@ -140,6 +140,12 @@ export const CurrentSongContextProvider = ({children}) => {
         }
         }
 
+      function playFavouriteSongs(songId, artist, title, cover, preview, duration) {
+        const data = {songId, artist, title, cover, preview, duration}
+
+        setPlayingSong(data)
+        playSong(data.preview)
+      }  
     async function playAlbumSong(song, collection, id) {
         const targetId = song;
         let foundMatch = false;
@@ -152,7 +158,6 @@ export const CurrentSongContextProvider = ({children}) => {
           if (docSnapShot.exists()) {
             const docData = docSnapShot.data();
             const dataArray = Object.values(docData);
-            console.log(dataArray);
               for (let i = 0; i < dataArray.length; i++) {
                 const data = dataArray[i].data;
                 data.forEach((data) => {
@@ -290,6 +295,7 @@ export const CurrentSongContextProvider = ({children}) => {
         playArtistsSong,
         setIsPlaying,
         playPlaylist,
+        playFavouriteSongs,
         songDuration,
         currentSongTime
     }

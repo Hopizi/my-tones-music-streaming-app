@@ -7,10 +7,9 @@ import { ThemeContext } from "../context/DarkMode";
 
 function AlbumMusicCard({
   songArtist,
-  songCover,
   songTitle,
-  onClick,
-  isLiked,
+  likeSong,
+  IsLiked,
   playSong,
   songCurrentStyle,
   duration,
@@ -36,7 +35,11 @@ function AlbumMusicCard({
         </div>
         <div className="my-music-card-time-like-others">
           <p>{fmtMSS(duration)}</p>
-          <Like />
+          <IsLiked onClick={(event) => {
+              event.stopPropagation();
+              likeSong();
+              }}
+              />
           <Dots />
         </div>
       </div>

@@ -1,11 +1,17 @@
 import React, {useContext} from 'react'
 import {AlbumMusicCard} from "../components"
 import { CurrentSongContext } from '../context/CurrentSong';
+import { FavouriteSongsContext } from '../context/FavouriteSongs';
+import { Like } from "../assets/navbar-icons";
+import { HeartLike } from "../assets/main-display-icons";
 
 function FeaturedAlbumInfo({albumClicked}) {
 
     const { playFeaturedAlbumSong } = useContext(CurrentSongContext);
-    const { playingSong } = useContext(CurrentSongContext);4
+    const { playingSong } = useContext(CurrentSongContext);
+    const { addFavouriteSong, favouritesSongs } = useContext(
+      FavouriteSongsContext
+    );
 
     const playingSongsStyles = {
       color: "#4343ef",
@@ -45,9 +51,24 @@ function FeaturedAlbumInfo({albumClicked}) {
               playSong={() =>
                 playFeaturedAlbumSong(albumSong.id, "albums", "featuredAlbums")
               }
+              IsLiked={
+                favouritesSongs.some((data) => albumSong.id === data.songId)
+                  ? HeartLike
+                  : Like
+              }
               songCurrentStyle={
                 playingSong?.id === albumSong.id ? playingSongsStyles : {}
               }
+              likeSong={() => {
+                addFavouriteSong(
+                  albumSong.id,
+                  albumSong.artist.name,
+                  albumSong.title,
+                  albumSong.album.cover_big,
+                  albumSong.preview,
+                  albumSong.duration
+                );
+              }}
             />
           );
         })}

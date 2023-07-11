@@ -14,28 +14,30 @@ import {
 import { ThemeContext } from "../context/DarkMode";
 import { Play, Shuffle } from "../assets/now-playing-icons";
 import {GoBack} from "../assets/main-display-icons";
+import { CurrentSongContext } from "../context/CurrentSong";
 
 function Explore() {
 
   const { theme } = useContext(ThemeContext);
+  const { playPlaylist } = useContext(CurrentSongContext);
 
   const [clicked, setClicked] = useState(false);
   const [albumClicked, setAlbumClicked] = useState();
   const [playlists, setPlaylist] = useState();
 
-  // useEffect(() => {
-  //   let songsInfo = [];
-  //   albumClicked?.forEach((song) => {
-  //     songsInfo.push({
-  //       preview: song.preview,
-  //       cover_big: song.album.cover_big,
-  //       title: song.title,
-  //       artist: song.artist.name,
-  //       id: song.id,
-  //     });
-  //   });
-  //   setPlaylist(songsInfo);
-  // }, [albumClicked])
+  useEffect(() => {
+    let songsInfo = [];
+    albumClicked?.tracks.data.forEach((song) => {
+      songsInfo.push({
+        preview: song.preview,
+        cover_big: song.album.cover_big,
+        title: song.title,
+        artist: song.artist.name,
+        id: song.id,
+      });
+    });
+    setPlaylist(songsInfo);
+  }, [albumClicked])
 
   return (
     <div className="home-page-main-container" id={theme}>

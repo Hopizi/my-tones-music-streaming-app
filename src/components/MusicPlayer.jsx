@@ -53,9 +53,16 @@ function MusicPlayer() {
       <div className="inner-music-player" id={theme}>
         <div className="inner-1">
           <div className="inner-music-player-col-1">
-            <div className="current-song-image" style={!currentSong ? {visibility: "hidden"} : {}}>
+            <div
+              className="current-song-image"
+              style={!currentSong ? { visibility: "hidden" } : {}}
+            >
               <img
-                src={currentSong?.album?.cover_big || currentSong?.cover_big}
+                src={
+                  currentSong?.album?.cover_big ||
+                  currentSong?.cover_big ||
+                  currentSong?.cover
+                }
               />
             </div>
             <div className="current-music-title">
@@ -65,16 +72,29 @@ function MusicPlayer() {
           </div>
           <div className="inner-music-player-col-2">
             <div className="current-music-controls">
-
-              { currentSong ?
-                favouritesSongs.includes(currentSongId) ? <HeartLike /> : <Like /> : ''
-              }
+              {currentSong ? (
+                favouritesSongs.includes(currentSongId) ? (
+                  <HeartLike />
+                ) : (
+                  <Like />
+                )
+              ) : (
+                "" ||
+                (favouritesSongs.some((data) => currentSongId === data.songId) ? (
+                  <HeartLike />
+                ) : (
+                  <Like />
+                ))
+              )}
               <Previous className="next-previous" />
               <div className="pause-play-container">
                 {isPlaying ? (
                   <Pause className="pause-play" onClick={() => pausePlay()} />
                 ) : (
-                  <Play className="pause-play play" onClick={() => pausePlay()} />
+                  <Play
+                    className="pause-play play"
+                    onClick={() => pausePlay()}
+                  />
                 )}
               </div>
               <Next className="next-previous" />
@@ -83,9 +103,12 @@ function MusicPlayer() {
           </div>
         </div>
         <div className="song-progress-container">
-          { currentSongTime &&
-          <div className="song-progress" style={{ width: `${duration}%` }}></div>
-          }
+          {currentSongTime && (
+            <div
+              className="song-progress"
+              style={{ width: `${duration}%` }}
+            ></div>
+          )}
         </div>
       </div>
     </div>

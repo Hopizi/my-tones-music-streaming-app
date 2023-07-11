@@ -4,13 +4,19 @@ import {Like} from '../assets/navbar-icons'
 import { Dots } from '../assets/main-display-icons'
 import { ThemeContext } from '../context/DarkMode'
 
-function PlaylistsMusicCard({musicTitle, artist, duration, songCover, playSong}) {
+function PlaylistsMusicCard({
+  musicTitle,
+  artist,
+  duration,
+  songCover,
+  playSong,
+  songCurrentStyle,
+}) {
+  const { theme } = useContext(ThemeContext);
 
-    const {theme} = useContext(ThemeContext)
-
-    function fmtMSS(s) {
-      return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
-    }
+  function fmtMSS(s) {
+    return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
+  }
 
   return (
     <div className="playlists-music-card" id={theme} onClick={playSong}>
