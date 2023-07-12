@@ -4,6 +4,7 @@ import {
   Facebook,
   Google,
   Show,
+  Hide
 } from "../assets/main-display-icons";
 import { ContinueWith, Button, CustomInput, CustomSelect, CustomCheckBox, CustomAgeInput } from "../components";
 import { Logo } from "../assets/sidebar-icons";
@@ -40,6 +41,11 @@ function SignUp() {
     }
   }
 
+  const [type, setType] = useState({
+    password: 'password',
+    confirmPassword: 'password'
+  })
+
   return (
     <Formik
       initialValues={{
@@ -56,13 +62,13 @@ function SignUp() {
       }}
       validationSchema={signUpSchema}
       onSubmit={(values, actions) => {
-        createANewUser(values)
+        createANewUser(values);
         setTimeout(() => {
           actions.setSubmitting(false);
         }, 1500);
       }}
     >
-      {({isSubmitting}) => (
+      {({ isSubmitting }) => (
         <div className="sign-up-main-container">
           <div className="sign-up-card-main">
             <div className="sign-up-logo">
@@ -104,19 +110,59 @@ function SignUp() {
                   <CustomInput
                     label="Password"
                     name="password"
-                    type="password"
+                    type={type.password}
                     placeholder="Enter a Password"
                   />
-                  <Show className="show-hide-sign-up" />
+                  {type.password === "password" ? (
+                    <Show
+                      className="show-hide-sign-up"
+                      onClick={() =>
+                        setType((prev) => ({
+                          ...prev,
+                          password: "text",
+                        }))
+                      }
+                    />
+                  ) : (
+                    <Hide
+                      className="show-hide-sign-up"
+                      onClick={() =>
+                        setType((prev) => ({
+                          ...prev,
+                          password: "password",
+                        }))
+                      }
+                    />
+                  )}
                 </div>
                 <div className="inputs-for-sign-up password-show-hide">
                   <CustomInput
                     label="Confirm Password"
                     name="confirmPassword"
-                    type="password"
+                    type={type.confirmPassword}
                     placeholder="Confirm your Password"
                   />
-                  <Show className="show-hide-sign-up" />
+                  {type.confirmPassword === "password" ? (
+                    <Show
+                      className="show-hide-sign-up"
+                      onClick={() =>
+                        setType((prev) => ({
+                          ...prev,
+                          confirmPassword: "text",
+                        }))
+                      }
+                    />
+                  ) : (
+                    <Hide
+                      className="show-hide-sign-up"
+                      onClick={() =>
+                        setType((prev) => ({
+                          ...prev,
+                          confirmPassword: "password",
+                        }))
+                      }
+                    />
+                  )}
                 </div>
                 <div className="inputs-for-sign-up">
                   <CustomInput

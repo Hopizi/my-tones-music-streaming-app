@@ -1,0 +1,11 @@
+.toast-notifications {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 12px;
+    text-align: center;
+    color: #fff;
+    background-color: #4343EF;
+}

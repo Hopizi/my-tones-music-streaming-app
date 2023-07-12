@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./styles/MusicPlayer.css";
-import { MusicPic } from "../assets/top100-icons";
 import {
   Shuffle,
   Previous,
@@ -15,6 +14,7 @@ import { CurrentSongContext } from "../context/CurrentSong";
 import { ThemeContext } from "../context/DarkMode";
 import { AuthContext } from "../context/AuthenticationContext";
 import { FavouriteSongsContext } from "../context/FavouriteSongs";
+import { motion } from "framer-motion";
 
 function MusicPlayer() {
 
@@ -49,7 +49,7 @@ function MusicPlayer() {
     }, [currentSongTime])
 
   return (
-    <div className="music-player-main-container">
+    <motion.div className="music-player-main-container">
       <div className="inner-music-player" id={theme}>
         <div className="inner-1">
           <div className="inner-music-player-col-1">
@@ -111,7 +111,7 @@ function MusicPlayer() {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

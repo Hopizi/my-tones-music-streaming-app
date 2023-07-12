@@ -6,6 +6,7 @@ import {
   Navbar,
   Top100Weekly,
   MusicPlayer,
+  ToastNotifications
 } from "../components";
 import { Play, Shuffle } from "../assets/now-playing-icons";
 import { db } from "../config/firebase";
@@ -16,6 +17,7 @@ import { ThemeContext } from "../context/DarkMode";
 import { FavouriteSongsContext } from "../context/FavouriteSongs";
 import { Like } from "../assets/navbar-icons";
 import { HeartLike } from "../assets/main-display-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 function MyMusic() {
 
@@ -30,6 +32,7 @@ function MyMusic() {
 
   const [musicSec, setMusicSec] = useState();
   const [playlists, setPlaylists] = useState();
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,6 +70,14 @@ function MyMusic() {
     setPlaylists(songsInfo);
   }, [musicSec])
 
+  function showNotification() {
+    setShowToast(true)
+    setTimeout(() => {
+        setShowToast(false);
+    }, 3000);
+  }
+
+
   const playingSongsStyles = {
     color: "#4343ef",
   };
@@ -82,6 +93,11 @@ function MyMusic() {
         </div>
         <div className="music-space-main">
           <div className="main-page-display">
+            <AnimatePresence>
+              {showToast && (
+                <ToastNotifications message="Added To Favourites" />
+              )}
+            </AnimatePresence>
             <div className="my-music-main-container">
               <div className="my-music-header-section">
                 <h1>My Music</h1>
@@ -113,7 +129,7 @@ function MyMusic() {
                         songTitle={song.title}
                         songCover={song.album.cover_big}
                         key={idx}
-                        onClick={() =>
+                        onClick={() => {
                           addFavouriteSong(
                             song.id,
                             song.artist.name,
@@ -122,7 +138,8 @@ function MyMusic() {
                             song.preview,
                             song.duration
                           )
-                        }
+                          favouritesSongs.some((data) => song.id === data.songId) ? '' : showNotification();
+                        }}
                         IsLiked={
                           favouritesSongs.some(
                             (data) => song.id === data.songId

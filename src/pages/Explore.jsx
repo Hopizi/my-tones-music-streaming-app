@@ -9,12 +9,14 @@ import {
   Top100Weekly,
   NowPlaying,
   MusicPlayer,
-  FeaturedAlbumInfo
+  FeaturedAlbumInfo,
+  ToastNotifications
 } from "../components";
 import { ThemeContext } from "../context/DarkMode";
 import { Play, Shuffle } from "../assets/now-playing-icons";
 import {GoBack} from "../assets/main-display-icons";
 import { CurrentSongContext } from "../context/CurrentSong";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Explore() {
 
@@ -24,6 +26,7 @@ function Explore() {
   const [clicked, setClicked] = useState(false);
   const [albumClicked, setAlbumClicked] = useState();
   const [playlists, setPlaylist] = useState();
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     let songsInfo = [];
@@ -39,6 +42,13 @@ function Explore() {
     setPlaylist(songsInfo);
   }, [albumClicked])
 
+  function showNotification() {
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  }
+
   return (
     <div className="home-page-main-container" id={theme}>
       <div className="sidebar-container">
@@ -50,6 +60,11 @@ function Explore() {
         </div>
         <div className="music-space-main">
           <div className="main-page-display">
+            <AnimatePresence>
+              {showToast && (
+                <ToastNotifications message="Added To Favourites" />
+              )}
+            </AnimatePresence>
             <div className="explore-main">
               <div className="albums-header-container">
                 <div className="page-header-section">
@@ -85,7 +100,7 @@ function Explore() {
                 )}
               </div>
               {clicked ? (
-                <FeaturedAlbumInfo albumClicked={albumClicked} />
+                <FeaturedAlbumInfo albumClicked={albumClicked} toastFunction={showNotification}/>
               ) : (
                 <React.Fragment>
                   <div className="featured-album-row-1">

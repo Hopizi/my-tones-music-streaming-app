@@ -5,7 +5,7 @@ import { FavouriteSongsContext } from '../context/FavouriteSongs';
 import { Like } from "../assets/navbar-icons";
 import { HeartLike } from "../assets/main-display-icons";
 
-function FeaturedAlbumInfo({albumClicked}) {
+function FeaturedAlbumInfo({albumClicked, toastFunction}) {
 
     const { playFeaturedAlbumSong } = useContext(CurrentSongContext);
     const { playingSong } = useContext(CurrentSongContext);
@@ -68,6 +68,9 @@ function FeaturedAlbumInfo({albumClicked}) {
                   albumSong.preview,
                   albumSong.duration
                 );
+                favouritesSongs.some((data) => albumSong.id === data.songId)
+                  ? ''
+                  : toastFunction()
               }}
             />
           );

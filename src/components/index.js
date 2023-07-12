@@ -30,6 +30,7 @@ import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 import CustomCheckBox from "./CustomCheckBox";
 import CustomAgeInput from "./CustomAgeInput";
+import ToastNotifications from "./ToastNotifications";
 
 
 export {
@@ -64,5 +65,6 @@ export {
     CustomInput,
     CustomSelect,
     CustomCheckBox,
-    CustomAgeInput
+    CustomAgeInput,
+    ToastNotifications
 }

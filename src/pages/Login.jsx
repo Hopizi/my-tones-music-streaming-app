@@ -16,7 +16,7 @@ function Login() {
 
     const {currentUser, error, signInWithGoogle, signIn} = useContext(AuthContext)
 
-    const {values, handleBlur, handleChange, handleSubmit} = useFormik({
+    const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
         initialValues: {
             email: '',
             password: ''
@@ -24,6 +24,7 @@ function Login() {
         validationSchema: loginSchema,
         onSubmit: (values) => {
             const {email, password} = values;
+            console.log(email, password)
             signIn(email, password);
         }
     });
@@ -69,6 +70,7 @@ function Login() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                {touched.email && errors.email && <div className='error'>{errors.email}</div>}
               </div>
               <div className="actual-forms password-show-hide">
                 <label>Password</label>
@@ -80,6 +82,7 @@ function Login() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                {touched.password && errors.password && <div className='error'>{errors.password}</div>}
                 <Hide className="show-hide" />
               </div>
               {error && (
@@ -94,7 +97,7 @@ function Login() {
               <div className="login-btn-main">
                 <Button text="Log In" style="width-100" />
               </div>
-              <Link to='/forgot-password'>
+              <Link to="/forgot-password">
                 <p className="password-forgot">Forgot your password?</p>
               </Link>
             </form>

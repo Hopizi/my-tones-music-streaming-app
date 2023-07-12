@@ -10,7 +10,8 @@ import {
   NowPlaying,
   AlbumMusicCard,
   MyMusicCard,
-  MusicPlayer
+  MusicPlayer,
+  ToastNotifications
 } from "../components";
 import { db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -21,6 +22,7 @@ import { ThemeContext } from "../context/DarkMode";
 import { FavouriteSongsContext } from "../context/FavouriteSongs";
 import { Like } from "../assets/navbar-icons";
 import { HeartLike } from "../assets/main-display-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Albums() {
 
@@ -36,6 +38,7 @@ function Albums() {
     const [clicked, setClicked] = useState(false)
     const [albumClicked, setAlbumClicked] = useState()
     const [playlists, setPlaylist] = useState()
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -72,6 +75,13 @@ function Albums() {
       setPlaylist(songsInfo)
     },[albumClicked])
 
+    function showNotification() {
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    }
+
     const playingSongsStyles = {
       color: "#4343ef",
     };
@@ -87,6 +97,11 @@ function Albums() {
         </div>
         <div className="music-space-main">
           <div className="main-page-display">
+            <AnimatePresence>
+              {showToast && (
+                <ToastNotifications message="Added To Favourites" />
+              )}
+            </AnimatePresence>
             <div className="albums-main-container">
               <div className="albums-header-container">
                 <div className="page-header-section">
@@ -155,7 +170,12 @@ function Albums() {
                           playSong={() =>
                             playAlbumSong(albumSong.id, "albums", "albums")
                           }
-                          IsLiked={favouritesSongs.some((data) => albumSong.id === data.songId )? HeartLike : Like
+                          IsLiked={
+                            favouritesSongs.some(
+                              (data) => albumSong.id === data.songId
+                            )
+                              ? HeartLike
+                              : Like
                           }
                           songCurrentStyle={
                             playingSong?.id === albumSong.id
@@ -171,6 +191,11 @@ function Albums() {
                               albumSong.preview,
                               albumSong.duration
                             );
+                            favouritesSongs.some(
+                              (data) => albumSong.id === data.songId
+                            )
+                              ? ''
+                              : showNotification();
                           }}
                         />
                       );

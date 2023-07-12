@@ -27,6 +27,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   async function signIn(email, password) {
+    console.log('function triggered')
     try {
       const userCredentials = await signInWithEmailAndPassword(
         auth,
