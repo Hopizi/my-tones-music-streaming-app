@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./styles/Settings.css";
-import { Button } from "../components";
+import { Button, ToastNotifications } from "../components";
 import { ProfilePic, ProfilePicHolder } from "../assets/navbar-icons";
 import { Camera } from "../assets/main-display-icons";
 import {
@@ -16,6 +16,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Sidebar, Navbar, Top100Weekly, NowPlaying } from "../components";
 import { AuthContext } from "../context/AuthenticationContext";
 import { ThemeContext } from "../context/DarkMode";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Settings() {
   const { userData } = useContext(AuthContext);
@@ -29,14 +30,15 @@ function Settings() {
     firstName: "",
     lastName: "",
     language: "",
+    profile_pic: ""
   });
   const [percetage, setPercentage] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const uploadFile = () => {
       const name = new Date().getTime() + image.name;
 
-      console.log(name);
       const storageRef = ref(storage, name);
       const uploadTask = uploadBytesResumable(storageRef, image);
 
@@ -45,14 +47,11 @@ function Settings() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
           setPercentage(progress);
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
               break;
             default:
               break;
@@ -63,7 +62,7 @@ function Settings() {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setData((prev) => ({ ...prev, img: downloadURL }));
+            setData((prev) => ({ ...prev, profile_pic: downloadURL }));
           });
         }
       );
@@ -101,10 +100,17 @@ function Settings() {
 
     try {
       await updateDoc(userRef, data);
-      console.log("addotional info added Sucessfully");
+      showNotification();
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function showNotification() {
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   }
 
   return (
@@ -118,6 +124,11 @@ function Settings() {
         </div>
         <div className="music-space-main">
           <div className="main-page-display">
+            <AnimatePresence>
+              {showToast && (
+                <ToastNotifications message="Details Updated Successfully" />
+              )}
+            </AnimatePresence>
             <div className="settings-main-container">
               <div className="settings-header-section">
                 <h1>Settings</h1>
@@ -127,7 +138,11 @@ function Settings() {
                   <div className="user-profile-pic-settings">
                     <div className="user-profile-pic-settings-container">
                       <img
-                        src={image ? URL.createObjectURL(image) : userData?.img}
+                        src={
+                          image
+                            ? URL.createObjectURL(image)
+                            : userData?.profile_pic
+                        }
                       />
                       <div className="camera-icon-container">
                         <label htmlFor="fileUpload" className="camera-icon">

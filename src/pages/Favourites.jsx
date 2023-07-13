@@ -27,7 +27,7 @@ function Favourites() {
     const unSubscribe = onSnapshot(docRef, (docSnapShot) => {
       if (docSnapShot.exists()) {
         const docData = docSnapShot.data();
-        const favSongs = docData.favoriteSongs;
+        const favSongs = docData.favoriteSongs.reverse();
         setFavouriteSongsData(favSongs);
       } else {
         console.log("Not Found");
@@ -40,16 +40,16 @@ function Favourites() {
   
   useEffect(() => {
     let songsInfo = [];
+    console.log(favouriteSongsData)
     favouriteSongsData?.forEach((song) => {
       songsInfo.push({
         preview: song.preview,
         cover_big: song.cover,
         title: song.title,
         artist: song.artist,
-        id: song.id,
+        id: song.songId,
       });
     });
-    console.log(songsInfo);
     setPlaylists(songsInfo);
   }, [favouriteSongsData]);
 

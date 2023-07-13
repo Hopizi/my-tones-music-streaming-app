@@ -48,7 +48,7 @@ export const FavouriteSongsContextProvider = ({ children }) => {
       try {
         const docRef = doc(db, "usersPreferences", userId);
 
-        console.log(title);
+        console.log(songId);
         let docSnapShot = await getDoc(docRef);
         let inLikedata;
 

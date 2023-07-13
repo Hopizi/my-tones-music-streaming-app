@@ -44,7 +44,7 @@ function Top100Weekly() {
   return (
     <div className='top-100-main-container' id={theme}>
         <div className='top-header-sect'>
-            <h1>TOP 100 WEEKLY</h1>
+            <h1>TOP 10 WEEKLY</h1>
             <p>More list</p>
         </div>
         <div className='songs-card-container'>

@@ -9,7 +9,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { db } from "../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
 export const AuthContext = createContext(null);
 
@@ -35,7 +35,6 @@ export const AuthContextProvider = ({ children }) => {
         password
       );
       setCurrentUser(userCredentials.user);
-      console.log(currentUser);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -69,7 +68,7 @@ export const AuthContextProvider = ({ children }) => {
       if (user) {
         const userId = currentUser.uid;
         let userData = [];
-
+        
         const docRef = doc(db, "users", userId);
         const docSnap = await getDoc(docRef);
 

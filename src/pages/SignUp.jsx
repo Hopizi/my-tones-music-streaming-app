@@ -20,6 +20,8 @@ import { Formik, Form, ErrorMessage, useFormikContext } from "formik";
 import { signUpSchema } from "../custom/schemas/SignUpSchema";
 
 function SignUp() {
+
+  const default_profile = 'https://firebasestorage.googleapis.com/v0/b/my-tones-streaming-app.appspot.com/o/default-profile-picture.jpg?alt=media&token=57612af0-0d78-4b82-ae4d-ea4b911a28b0'
   async function createANewUser(values) {
     try {
       const res = await createUserWithEmailAndPassword(
@@ -35,6 +37,7 @@ function SignUp() {
         marketingMessages: values.marketingMessages,
         shareRegistrationData: values.shareRegistrationData,
         timeAcctCreate: serverTimestamp(),
+        profile_pic: default_profile,
       });
     } catch (error) {
       console.log(error);

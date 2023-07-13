@@ -15,7 +15,6 @@ function CustomInput({label, ...props}) {
         {...props}
         className={meta.touched && meta.error ? "input-error" : ""}
       />
-      {/* <div style={`visibility: ${meta.error ? 'hidden' : 'visible'}; height: ${meta.error ? '1rem' : '0'}`}></div> */}
       {meta.touched && meta.error && (
         <motion.div
           className="error"

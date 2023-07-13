@@ -11,16 +11,18 @@ import { doc, getDoc } from 'firebase/firestore';
 import { UserDetailsContext } from '../context/UserDetails'
 import { ThemeContext } from '../context/DarkMode'
 
-function Navbar({navUserData}) {
+function Navbar() {
 
     const {currentUser} = useContext(AuthContext)
     const {userData} = useContext(AuthContext)
     const { theme } = useContext
-    
-    useEffect(() => {
-        console.log(userData)
-    }, userData)
 
+    const [userInfo, setUserInfo] = useState(null)
+
+    useEffect(() => {
+      setUserInfo(userData)
+    }, [userData])
+    
 
   return (
     <div className="navbar-main-container">
@@ -49,10 +51,10 @@ function Navbar({navUserData}) {
             </div>
             <div className="user-info-section">
               <div className="user-profile-pic" style={!currentUser ? {visibility: "hidden"} : {}}>
-                <img src={userData?.img} />
+                <img src={userInfo?.profile_pic} />
               </div>
               <div className="user-name">
-                <p>{userData?.userName}</p>
+                <p>{userInfo?.userName}</p>
                 <DropDown />
               </div>
             </div>
